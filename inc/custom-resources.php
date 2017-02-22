@@ -95,7 +95,7 @@
 										the_post_thumbnail('thumbnail');
 									}
 									else {
-										echo '<img src="' . get_stylesheet_directory_uri() . '/img/pdf_icon_960_720.png" class="wp-post-image" style="max-height:150px;" />';
+										echo wp_get_attachment_image( get_the_id(), 'thumbnail');
 									} ?>
 						<h2><?php the_title(); ?></h2>
 					</a>
@@ -136,7 +136,7 @@
 										the_post_thumbnail('thumbnail');
 									}
 									else {
-										echo '<img src="' . get_stylesheet_directory_uri() . '/img/pdf_icon_960_720.png" class="wp-post-image" style="max-height:150px;" />';
+										echo wp_get_attachment_image( get_the_id(), 'thumbnail');
 									} ?>
 						<h2><?php the_title(); ?></h2>
 					</a>
@@ -176,7 +176,7 @@
 										the_post_thumbnail('thumbnail');
 									}
 									else {
-										echo '<img src="' . get_stylesheet_directory_uri() . '/img/pdf_icon_960_720.png" class="wp-post-image" style="max-height:150px;" />';
+										echo wp_get_attachment_image( get_the_id(), 'thumbnail');
 									} ?>
 						<h2><?php the_title(); ?></h2>
 					</a>
@@ -216,7 +216,7 @@
 										the_post_thumbnail('thumbnail');
 									}
 									else {
-										echo '<img src="' . get_stylesheet_directory_uri() . '/img/pdf_icon_960_720.png" class="wp-post-image" style="max-height:150px;" />';
+										echo wp_get_attachment_image( get_the_id(), 'thumbnail');
 									}?>
 						<h2><?php the_title(); ?></h2>
 					</a>
@@ -257,7 +257,7 @@
 										the_post_thumbnail('thumbnail');
 									}
 									else {
-										echo '<img src="' . get_stylesheet_directory_uri() . '/img/pdf_icon_960_720.png" class="wp-post-image" style="max-height:150px;" />';
+										echo wp_get_attachment_image( get_the_id(), 'thumbnail');
 									} ?>
 						<h2><?php the_title(); ?></h2>
 
@@ -299,7 +299,7 @@
 										the_post_thumbnail('thumbnail');
 									}
 									else {
-										echo '<img src="' . get_stylesheet_directory_uri() . '/img/pdf_icon_960_720.png" class="wp-post-image" style="max-height:150px;" />';
+										echo wp_get_attachment_image( get_the_id(), 'thumbnail');
 									} ?>
 						<h2><?php the_title(); ?></h2>
 						
