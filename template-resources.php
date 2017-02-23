@@ -237,7 +237,12 @@ function lwr_add_isotope_script() {
 									if ( has_post_thumbnail() ) {
 										the_post_thumbnail( 'medium' );
 									} else {
-										echo '<img src="' . get_stylesheet_directory_uri() . '/img/pdf_icon_960_720.png" />';
+										$thumbnail = wp_get_attachment_image( get_the_id(), 'medium');
+										if ( !empty($thumbnail) ) {
+											echo $thumbnail;
+										} else {		
+											echo '<img src="' . get_stylesheet_directory_uri() . '/img/pdf_icon_960_720.png" />';
+										}
 									} ?></a>
 									<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></h3></a>
 									<p><?php echo esc_html( get_the_excerpt() ); ?></p>
