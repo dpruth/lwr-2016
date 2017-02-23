@@ -169,7 +169,7 @@ function lwr_add_isotope_script() {
 									if ( has_post_thumbnail() ) {
 										the_post_thumbnail( 'medium' );
 									} else {
-										$thumbnail = wp_get_attachment_image( get_the_id(), 'medium');
+										$thumbnail = wp_get_attachment_image( get_the_id(), 'medium', false, array('class' => 'wp-post-image' ) );
 										if ( !empty($thumbnail) ) {
 											echo $thumbnail;
 										} else {		
@@ -237,7 +237,7 @@ function lwr_add_isotope_script() {
 									if ( has_post_thumbnail() ) {
 										the_post_thumbnail( 'medium' );
 									} else {
-										$thumbnail = wp_get_attachment_image( get_the_id(), 'medium');
+										$thumbnail = wp_get_attachment_image( get_the_id(), 'medium', false, array('class' => 'wp-post-image' ) );
 										if ( !empty($thumbnail) ) {
 											echo $thumbnail;
 										} else {		
