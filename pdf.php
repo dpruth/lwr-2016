@@ -22,10 +22,11 @@
 
 					} else { // OTHERWISE, JUST GET THE NAME
 						$term_name = $term->name;
+						$child_id = NULL;
 					}
 				
 				}
-			} else { $term_name = 'File'; }
+			} else { $term_name = 'File'; $child_id = NULL; }
 			
 
 			?>
@@ -57,7 +58,7 @@
 			/*
 			 * List Previous Situation Reports
 			 */ 
-			if ( $child_id != null ) {
+			if ( !is_null($child_id) ) {
 						$args = array(
 							'posts_per_page' => -1,
 							'post__not_in' => array( $post_id ),
