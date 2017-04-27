@@ -13,12 +13,14 @@
  * @see 	    https://docs.woocommerce.com/document/template-structure/
  * @author 		WooThemes
  * @package 	WooCommerce/Templates/Emails
- * @version     2.1.2
+ * @version     3.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
+
+$text_align = is_rtl() ? 'right' : 'left';
 
 foreach ( $items as $item_id => $item ) :
 	$_product     = apply_filters( 'woocommerce_order_item_product', $order->get_product_from_item( $item ), $item );
@@ -62,43 +64,30 @@ foreach ( $items as $item_id => $item ) :
 							echo '<br/><small>' . nl2br( $item_meta->display( true, true, '_', "\n" ) ) . '</small>';
 						}
 					}
-					
-					/*********************************					
-					$my_variation = $item_meta->meta['what-type-of-greeting-will-you-send-for-this-gift'];
-					
-					
-					
-					if (!empty( $my_variation ) ) {
-						$haystack = array_values($my_variation);
-						if ( in_array( 'I will send an e-card or print my own cards', $haystack ) ) {
-							echo '<br /><small><a href="' . esc_url('http://cards.lwrgifts.org') . '">Print or email your greeting cards</a></small>';
-						} elseif ( in_array('Please send me blank, pre-printed cards', $haystack ) ) {
-							echo '<br /><small>Please allow up to 10 business days for the order to be processed and placed in the mail.</small>';
-						}else {
-							echo '<br/><small>' . nl2br( $item_meta->display( true, true, '_', "\n" ) ) . '</small>';
-						}
-					}
-					***************************/
 				}
 
-				// File URLs
+				// allow other plugins to add additional product information here
+				do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order, $plain_text );
+
+				wc_display_item_meta( $item );
+
 				if ( $show_download_links ) {
-					$order->display_item_downloads( $item );
+					wc_display_item_downloads( $item );
 				}
 
 				// allow other plugins to add additional product information here
 				do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, $plain_text );
 
 			?></td>
-			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo apply_filters( 'woocommerce_email_order_item_quantity', $item['qty'], $item ); ?></td>
-			<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo $order->get_formatted_line_subtotal( $item ); ?></td>
+			<td class="td" style="text-align:<?php echo $text_align; ?>; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo apply_filters( 'woocommerce_email_order_item_quantity', $item->get_quantity(), $item ); ?></td>
+			<td class="td" style="text-align:<?php echo $text_align; ?>; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo $order->get_formatted_line_subtotal( $item ); ?></td>
 		</tr>
 		<?php
 	}
 
-	if ( $show_purchase_note && is_object( $_product ) && ( $purchase_note = get_post_meta( $_product->id, '_purchase_note', true ) ) ) : ?>
+	if ( $show_purchase_note && is_object( $product ) && ( $purchase_note = $product->get_purchase_note() ) ) : ?>
 		<tr>
-			<td colspan="3" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo wpautop( do_shortcode( wp_kses_post( $purchase_note ) ) ); ?></td>
+			<td colspan="3" style="text-align:<?php echo $text_align; ?>; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo wpautop( do_shortcode( wp_kses_post( $purchase_note ) ) ); ?></td>
 		</tr>
 	<?php endif; ?>
 
