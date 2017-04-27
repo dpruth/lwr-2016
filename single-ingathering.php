@@ -46,10 +46,10 @@ get_header(); ?>
 
 					$notes = $fields["notes"];
 					$upload = $fields["pdf_upload"];
-					$address = get_post_meta(get_the_ID(), "_ingathering_address", true);					
-					$city = get_post_meta(get_the_ID(), "_ingathering_city", true);
-					$state = get_post_meta(get_the_ID(), "_ingathering_state", true);
-					$zip = get_post_meta(get_the_ID(), "_ingathering_zip", true);
+					$address = get_post_meta($id, "_ingathering_address", true);					
+					$city = get_post_meta($id, "_ingathering_city", true);
+					$state = get_post_meta($id, "_ingathering_state", true);
+					$zip = get_post_meta($id, "_ingathering_zip", true);
 					$location = str_replace( " ", "+", get_the_title() );
 					$dir_address = str_replace( " ", "+", $address);
 				?>
@@ -151,8 +151,9 @@ get_header(); ?>
 			 * @hooked storefront_post_nav - 10
 			 */
 			do_action( 'storefront_single_post_after' );
-			
-			endwhile; // end of the loop. ?>
+			?>
+
+		<?php endwhile; // end of the loop. ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
