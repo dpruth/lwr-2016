@@ -35,6 +35,12 @@
 	}
 	add_action( 'project_location_end', 'add_project_location_end' );
 	
+	// MAP SYMBOLS
+	$theme_dir = get_stylesheet_directory_uri();
+	$ag_symbol = $theme_dir . '/img/Ag_35.png';
+	$er_symbol = $theme_dir . '/img/ER_35.png';
+	$mr_symbol = $theme_dir . '/img/MR_35.png';
+	$climate_symbol = $theme_dir . '/img/Climate_35.png';
 /**
  * START THE LOOP FOR PROJECTS
 **/
@@ -56,13 +62,13 @@
 							"link": "<?php the_permalink(); ?>",
 							"description": "Sector: <?php foreach ( $terms as $term ) { $sector_names .= $term->name.", "; $sector_list[] = $term->name; } echo substr_replace($sector_names,'', strrpos($sector_names, ', ')); ?><br /><a href=\"<?php the_permalink(); ?>\">View this project</a>",
 							<?php if(in_array("Agriculture", $sector_list)){ ?>
-								"symbol": "/wp-content/themes/lwr/img/Ag_35.png"
+								"symbol": "<?php echo esc_url($ag_symbol); ?>"
 							<?php } elseif(in_array("Emergency Operations", $sector_list) ){ ?>
-								"symbol": "/wp-content/themes/lwr/img/ER_35.png"
+								"symbol": "<?php echo esc_url($er_symbol); ?>"
 							<?php } elseif( in_array("Quilt &amp; Kit Distribution", $sector_list) ){ ?>
-								"symbol": "/wp-content/themes/lwr/img/MR_35.png"
+								"symbol": "<?php echo esc_url($mr_symbol); ?>"
 							<?php } else { ?>
-								"symbol": "/wp-content/themes/lwr/img/Climate_35.png"
+								"symbol": "<?php echo esc_url($climate_symbol); ?>"
 							<?php } ?>
 						}
 					
@@ -198,13 +204,13 @@
 						"link": "<?php the_permalink(); ?>",
 						"description": "Sector: <?php foreach ( $terms as $term ) { $sector_names .= $term->name.", "; $sector_list[] = $term->name; } echo substr_replace($sector_names,'', strrpos($sector_names, ', ')); ?><br /><a href=\"<?php the_permalink(); ?>\">View this project</a>",
 						<?php if(in_array("Agriculture", $sector_list)){ 
-							echo '"symbol" : "' . get_stylesheet_directory_uri() . '/img/Ag_35.png"';
+							echo '"symbol" : "' . esc_url($ag_symbol) . '"';
 					} elseif(in_array("Emergency Operations", $sector_list) ){ 
-							echo '"symbol" : "' . get_stylesheet_directory_uri() . '/img/ER_35.png"';
+							echo '"symbol" : "' . esc_url($er_symbol) . '"';
 					} elseif( in_array("Quilt &amp; Kit Distribution", $sector_list) ){ 
-							echo '"symbol" : "' . get_stylesheet_directory_uri() . '/img/MR_35.png"';
+							echo '"symbol" : "' . esc_url($mr_symbol) . '"';
 					} else { 
-							echo '"symbol" : "' . get_stylesheet_directory_uri() . '/img/Climate_35.png"';
+							echo '"symbol" : "' . esc_url($climate_symbol) . '"';
 						} ?>
 					},
 					<?php }/*end while*/ 
