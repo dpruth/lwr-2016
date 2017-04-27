@@ -55,7 +55,7 @@
 				wp_reset_postdata(); 
 					
 				?>
-	<a href="/videos" class="text-only">View All Videos&raquo;</a>
+	<a href="<?php echo esc_url( get_post_type_archive_link('lwr_videos') ); ?>" class="text-only">View All Videos&raquo;</a>
 
 	</div>
 	
