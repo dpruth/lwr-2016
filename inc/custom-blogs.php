@@ -62,7 +62,7 @@
 				wp_reset_postdata(); 
 					
 				?>
-			<a href="/category/blog" class="text-only">View all Blog Posts &raquo;</a>
+			<a href="<?php echo esc_url( get_category_link(1) ); ?>" class="text-only">View more Blog Posts &raquo;</a>
 		</div>
 
 
