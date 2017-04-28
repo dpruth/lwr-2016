@@ -58,7 +58,7 @@
 				wp_reset_postdata(); 
 					
 				?>
-			<a href="/devotionals" class="text-only">View all Devotionals &raquo;</a>
+			<a href="<?php echo esc_url( get_category_link('227') ); ?>" class="text-only">View all Devotionals &raquo;</a>
 		</div>
 
 	</div>

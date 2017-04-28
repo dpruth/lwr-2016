@@ -29,7 +29,7 @@
 								echo the_post_thumbnail( 'medium' ); 
 							} 
 							else { ?>
-							<img src="<? echo get_stylesheet_directory_uri() . '/img/blankproject.png';?>" alt="<?php echo the_title(); ?>" />
+							<img src="<?php echo get_stylesheet_directory_uri() . '/img/blankproject.png'; ?>" alt="<?php echo the_title(); ?>" />
 							<?php }
 							
 							?></div>

@@ -18,7 +18,7 @@
 	function lwr_add_page_header_image() {
 		if ( has_post_thumbnail() ) {
 			?>
-			<header class="entry-header header-with-image">';
+			<header class="entry-header header-with-image">
 				<?php the_post_thumbnail( 'full' );
 					the_title( '<h1 class="entry-title within-image" itemprop="name">', '</h1>' ); ?>
 			</header>
@@ -37,7 +37,16 @@
 	function lwr_add_video_embed() {
 		the_title( '<h1 class="entry-title" itemprop="name">', '</h1>' );
 		echo '<div class="entry-content" itemprop="video" >';
-		the_field('video_url');
+			$iframe = get_field('video_url');
+			preg_match('/src="(.+?)"/', $iframe, $matches);
+			$src = $matches[1];
+		
+			$params = array( 'rel' => 0 );
+			$new_src = add_query_arg($params, $src);
+			$iframe = str_replace($src, $new_src, $iframe);
+		
+		echo $iframe;
+		
 		echo '</header>';
 	}
 
