@@ -146,7 +146,8 @@ add_filter( 'woocommerce_product_single_add_to_cart_text' , 'custom_add_to_cart_
 
 function custom_add_to_cart_text() {
 		global $product;
-		$prod_cats = wc_get_product_terms( $product->id, 'product_cat' );
+		$product_id = $product->get_id();
+		$prod_cats = wc_get_product_terms( $product_id, 'product_cat' );
 		
 			foreach ($prod_cats as $prod_cat) {
 				$cat_parent = $prod_cat->parent;
@@ -198,9 +199,10 @@ function custom_add_to_cart_text() {
 /************************************************
 	Add Charity Badges to Donation Pages
 	**********************************************/
-	function custom_add_charity_badges() {
+	function custom_add_charity_badges($product) {
 		global $product;
-		$prod_cats = wc_get_product_terms( $product->id, 'product_cat' );
+		$product_id = $product->get_id();
+		$prod_cats = wc_get_product_terms( $product_id, 'product_cat' );
 		
 			foreach ($prod_cats as $prod_cat) {
 				$cat_parent = $prod_cat->parent;
