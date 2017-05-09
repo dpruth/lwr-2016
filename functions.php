@@ -175,7 +175,8 @@ function custom_add_to_cart_text() {
 		if (get_option('modal_toggle') == 'on') {
 			wp_enqueue_script('jquery-ui-dialog','', array('jquery','jquery-ui-core'), false, true );
 			wp_enqueue_script('jquery-cookie', '', array('jquery'), false, true );
-			wp_enqueue_script('lwr_dialog', get_stylesheet_directory_uri() . '/js/lwr_jquery_dialog.js', array('jquery','jquery-ui-core','jquery-ui-dialog','jquery-cookie') );
+			// wp_enqueue_script('MC Validation', '//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js', array('lwr_dialog') ,false, true);
+			wp_enqueue_script('lwr_dialog', get_stylesheet_directory_uri() . '/js/lwr_jquery_dialog.js', array('jquery','jquery-ui-core','jquery-ui-dialog','jquery-cookie'), false, true );
 		}
 	}
 	add_action( 'wp_enqueue_scripts', 'enqueue_jquery_dialog' );
@@ -183,13 +184,51 @@ function custom_add_to_cart_text() {
 	function add_jquery_dialog() {
 		
 		if (get_option('modal_toggle') == 'on') { ?>
-		<div id="dialog" title="<?php echo esc_attr( get_option('modal_title') ); ?>">
-				<img src="<?php echo esc_url(get_option('modal_background') ); ?>" />
+		<div id="dialog">
 				<div id="dialog-text">
-				<?php echo get_option('modal_text'); ?>
-				<a class="button" href="<?php echo esc_url( get_option('modal_url') ); ?>" target="_blank"><?php echo esc_attr( get_option('modal_calltoaction') ); ?></a>
+				<h2><?php echo esc_attr( get_option('modal_title') ); ?></h2>
+				<p><?php echo get_option('modal_text'); ?></p>
+				
+				<!-- Begin MailChimp Signup Form -->
+				<div id="mc_embed_signup">
+				<form action="//lwr.us11.list-manage.com/subscribe/post?u=9ede5b497f32f90e55971b4c3&amp;id=a7efd06af7&amp;SIGNUP=lightbox" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+			<div id="mc_embed_signup_scroll">
+				<div class="mc-field-group">
+					<input type="email" value="" placeholder="Your Email Address&hellip;" name="EMAIL" class="required email" id="mce-EMAIL">
+				</div>
+				<div class="mc-field-group input-group" style="display:none;">
+				    <strong>ENewsletters </strong>
+				    <ul><li><input type="checkbox" value="1" name="group[5197][1]" id="mce-group[5197]-5197-0"checked><label for="mce-group[5197]-5197-0" >eNews (every other Friday)</label></li>
+								<li><input type="checkbox" value="4" name="group[5197][4]" id="mce-group[5197]-5197-1"><label for="mce-group[5197]-5197-1">LWR's Blog (2-3 per week)</label></li>
+								<li><input type="checkbox" value="32" name="group[5197][32]" id="mce-group[5197]-5197-2"><label for="mce-group[5197]-5197-2">Faith in Action (for Quilters &amp;amp; Kit Makers)</label></li>
+						</ul>
+				</div>
+				<div id="mce-responses">
+						<div class="response" id="mce-error-response" style="display:none"></div>
+						<div class="response" id="mce-success-response" style="display:none"></div>
+				</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+				<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_9ede5b497f32f90e55971b4c3_a7efd06af7" tabindex="-1" value=""></div>
+    		<div id="submit"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+			</div>
+			</form>
+			</div><!--End mc_embed_signup-->
 				</div>
 		</div>
+		<style>
+			.ui-dialog {
+				background: #fff url('<?php echo esc_url(get_option('modal_background') ); ?>') no-repeat;
+				background-size: contain;
+				text-align:center;
+			}	
+			.ui-dialog .mc-field-group {
+				float: left;
+				width: 60%;
+				margin-left: 10%;
+			}
+			#dialog-text input[type=email] {
+				width: 100%;
+			}
+		</style>
 	<?php
 		} 
 	}

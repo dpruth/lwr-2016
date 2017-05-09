@@ -68,16 +68,21 @@
 	<?php }
 
 	function lwr_featured_blog_post() {
-		$meta_query   = WC()->query->get_meta_query();
-		$meta_query[] = array(
-			'key'   => '_featured',
-			'value' => 'yes'
+		$meta_query   = WC()->query->get_meta_query();		
+		$tax_query   = WC()->query->get_tax_query();
+		$tax_query[] = array(
+			'taxonomy' => 'product_visibility',
+			'field'    => 'name',
+			'terms'    => 'featured',
+			'operator' => 'IN',
 		);
+
 		
 		$args = array(
 			'posts_per_page' => 1,
 			'post_type' => 'product',
-			'meta_query' => $meta_query
+			'meta_query' => $meta_query,
+			'tax_query' => $tax_query
 		);
 		
 		$featured_post = new WP_Query( $args );

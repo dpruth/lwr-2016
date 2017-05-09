@@ -2,7 +2,7 @@
 	Theme Name: Lutheran World Relief
 	Theme URI: http://lwr.org/wp-content/themes/lwr/
 	Template: storefront
-	Author: Dan Ruth, Lutheran World Relief
+	Author: Lutheran World Relief | Dan Ruth
 	Version: 1.2.0
 	License: GNU General Public License v2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -1674,11 +1674,16 @@ h1.faith-in-action { text-indent: -99999px; background: url('img/FIA-Logo.png') 
 .ui-dialog {
 				z-index: 9999;
 				background-color: #fff; 
-				padding: 0; 
-				border: 2px solid #294364; 
-				box-shadow: 3px 3px 1px;
+				padding: 10px; 
+				border: none; 
+				border-radius: 3px;
 				max-width: 95%;
 			}
+@media screen and (min-width: 568px) {
+	.ui-dialog {
+		min-height: 500px;
+	}
+}
 .ui-dialog .ui-dialog-titlebar {
 				position: relative;
 				z-index: 995;
@@ -1707,14 +1712,25 @@ h1.faith-in-action { text-indent: -99999px; background: url('img/FIA-Logo.png') 
 			width: 100%;
 		}
 #dialog-text {
-			width: 60%;
-			float: right;
-			padding: 18px;
-			position: absolute;
-			top: 26px;
-			right: 0;
-			color: #fff;
+			padding-top:40%;
+			width:100%;
+			margin: 1em 0;
+			float:none;
+			position: relative;
 		}
+	#dialog-text h2 {
+			font-size: 1.93333333em;
+			color:#74c3e4;
+			margin: 0;
+	}
+	#dialog-text p {
+			padding: 1em 10px;
+			color: #333;
+	}
+	#dialog-text input[type=email] {
+			width: 60%;
+	}
+
 .ui-dialog .ui-dialog-titlebar-close {
 	position: absolute;
 	right: .3em;
@@ -1830,7 +1846,7 @@ input.ui-button.ui-icon-notext .ui-icon {
 .ui-button:hover .ui-icon,
 .ui-button:focus .ui-icon,
 .ui-state-default .ui-icon {
-	background-image: url("img/ui-icons_555555_256x240.png");
+	background-image: url("img/ui-icons_777777_256x240.png");
 }
 .ui-state-active .ui-icon,
 .ui-button:active .ui-icon {
