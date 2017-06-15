@@ -3,7 +3,6 @@
  * @package storefront
  */
  
- 
  if ( is_front_page() ) { 
 					$source = 'homepage';
 					$value = '1';

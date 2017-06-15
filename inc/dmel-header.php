@@ -12,11 +12,11 @@
         <span class="fra">Conception, Suivi, Évaluation et Cadre d'Apprentissage</span>
         <span class="esp">Diseño, Seguimiento, Evaluación y Marco de Aprendizaje</span>
       </p>
-      <!--<select id="lang-select" class="form-control" style="width:auto;">
+      <select id="lang-select" class="form-control" style="width:auto;">
         <option value="show-english">English</option>
         <option value="show-french">Français</option>
         <option value="show-spanish">Español</option>
-      </select>-->
+      </select>
     </div>
     <div class="col-sm-5">
       <div class="resource-form-bar-wrapper">

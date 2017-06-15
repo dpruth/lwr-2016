@@ -7,6 +7,13 @@
 		wp_enqueue_script( 'arcgis', '//js.arcgis.com/3.16/', array(), '3.16', true );
 		wp_enqueue_script( 'lwr_map', get_stylesheet_directory_uri() . '/js/lwr_map_min.js', array('arcgis'), '1.0', true );
 		
+					$yearround_marker = get_stylesheet_directory_uri() . '/img/LWRmarker.png';
+					$springfall_marker = get_stylesheet_directory_uri() . '/img/LWRmarker_springfall.png';
+					$fall_marker = get_stylesheet_directory_uri() . '/img/LWRmarker_fall.png';
+					$spring_marker = get_stylesheet_directory_uri() . '/img/LWRmarker_spring.png';
+					$summer_marker = get_stylesheet_directory_uri() . '/img/LWRmarker_summer.png';
+					$winter_marker = get_stylesheet_directory_uri() . '/img/LWRmarker_winter.png';
+
 ?>
 
 <div class="page-section animated-object" id="project-locations">
@@ -16,12 +23,14 @@
 						echo 'LOCATION'; } else {
 						echo 'LOCATIONS'; } ?></h2>
 	</div>
+	<style> #searchMap { display: block; position:relative; z-index: 2; top:20px; left:74px } </style>
+	<div id="searchMap"></div>
 	<div id="mapDiv"></div>
 	<script>
 		var data = {"type": "FeatureCollection",
 			"features": [				<?php
 			if (is_post_type_archive('ingathering') ) {
-				
+								
 				$args = array(
 					'post_type' => 'ingathering',
 					'nopaging' => 'true'
@@ -54,20 +63,21 @@
 						"link": "<?php the_permalink(); ?>",
 						"description": "Address:<br /><?php echo $address; ?><br /><?php echo $city; ?>, <?php echo $state; ?> <?php echo $zip; ?><br /><a href=\"http://www.google.com/maps/dir//<?php echo $location; ?>+<?php echo $dir_address; ?>+<?php echo $city; ?>+<?php echo $state; ?>+<?php echo $zip; ?>\" target=\"_blank\">Get directions</a><br /><br /><a href=\"<?php the_permalink(); ?>\">More info&raquo;</a>",	
 						<?php if(in_array("Year Round", $seasons)){ 
-						?>"symbol": "/wp/wp-content/themes/lwr/img/LWRmarker.png"
+						?>"symbol": "<?php echo $yearround_marker; ?>"
 						<?php } elseif(in_array("Spring and Fall", $seasons)){ 
-						?>"symbol": "/wp/wp-content/themes/lwr/img/LWRmarker_springfall.png"
+						?>"symbol": "<?php echo $springfall_marker; ?>"
 						<?php } elseif(in_array("Fall", $seasons)){ 
-						?>"symbol": "/wp/wp-content/themes/lwr/img/LWRmarker_fall.png"
+						?>"symbol": "<?php echo $fall_marker; ?>"
 						<?php } elseif(in_array("Spring", $seasons)){ 
-						?>"symbol": "/wp/wp-content/themes/lwr/img/LWRmarker_spring.png"
+						?>"symbol": "<?php echo $spring_marker; ?>"
 						<?php } elseif(in_array("Summer", $seasons)){ 
-						?>"symbol": "/wp/wp-content/themes/lwr/img/LWRmarker_summer.png"
+						?>"symbol": "<?php echo $summer_marker; ?>"
 						<?php } else { 
-						?>"symbol": "/wp/wp-content/themes/lwr/img/LWRmarker_winter.png"
+						?>"symbol": "<?php echo $winter_marker; ?>"
 						<?php } ?>
 					},
-					<?php }/*end while*/
+					<?php } /*end while*/
+					wp_reset_postdata();
 				}/*end if*/ 
 			} /*end if */ 
 			else {
@@ -84,6 +94,7 @@
 						foreach($terms as $term) {
 							$seasons[] = $term->name;
 						}
+
 					?>
 					{	"type": "feature",
 						"geometry": {
@@ -95,23 +106,21 @@
 						"link": "<?php the_permalink(); ?>",
 						"description": "Address:<br /><?php echo $address; ?><br /><?php echo $city; ?>, <?php echo $state; ?> <?php echo $zip; ?><br /><a href=\"http://www.google.com/maps/dir//<?php echo $location; ?>+<?php echo $dir_address; ?>+<?php echo $city; ?>+<?php echo $state; ?>+<?php echo $zip; ?>\">Get directions</a>",
 						
-						<?php if(in_array("Year Round", $seasons)){ ?>
-								"symbol": "/wp/wp-content/themes/lwr/img/LWRmarker.png"
-						<?php } elseif(in_array("Fall and Spring", $seasons)){ ?>
-								"symbol": "/wp/wp-content/themes/lwr/img/LWRmarker_springfall.png"
-						<?php } elseif(in_array("Fall", $seasons)){ ?>
-								"symbol": "/wp/wp-content/themes/lwr/img/LWRmarker_fall.png"
-						<?php } elseif(in_array("Spring", $seasons)){ ?>
-								"symbol": "/wp/wp-content/themes/lwr/img/LWRmarker_spring.png"
-						<?php } elseif(in_array("Summer", $seasons)){ ?>
-								"symbol": "/wp/wp-content/themes/lwr/img/LWRmarker_summer.png"
-						<?php } else { ?>
-								"symbol": "/wp/wp-content/themes/lwr/img/LWRmarker_winter.png"
+						<?php if(in_array("Year Round", $seasons)){ 
+						?>"symbol": "<?php echo $yearround_marker; ?>"
+						<?php } elseif(in_array("Spring and Fall", $seasons)){ 
+						?>"symbol": "<?php echo $springfall_marker; ?>"
+						<?php } elseif(in_array("Fall", $seasons)){ 
+						?>"symbol": "<?php echo $fall_marker; ?>"
+						<?php } elseif(in_array("Spring", $seasons)){ 
+						?>"symbol": "<?php echo $spring_marker; ?>"
+						<?php } elseif(in_array("Summer", $seasons)){ 
+						?>"symbol": "<?php echo $summer_marker; ?>"
+						<?php } else { 
+						?>"symbol": "<?php echo $winter_marker; ?>"
 						<?php } ?>
 					}
-				<?php }
-				wp_reset_postdata();
-				?>
+			<?php }				?>
 			]
 		};
 	var map;
