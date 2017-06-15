@@ -12,19 +12,80 @@
 		remove_action( 'homepage', 'storefront_on_sale_products', 60 );
 		remove_action( 'homepage', 'storefront_best_selling_products', 70 );
 
-		add_action( 'homepage', 'lwr_full_screen_video_banner', 5);
+		add_action( 'homepage', 'lwr_hero_banner', 5);
 		add_action( 'homepage', 'lwr_reach_of_support_section', 10);
+		add_action( 'homepage', 'lwr_email_capture', 12 );
 		add_action( 'homepage', 'lwr_featured_blog_post', 15);
 		add_action( 'homepage', 'lwr_stay_informed_section', 20);
 		add_action( 'homepage', 'lwr_what_we_do_section', 25);
-		add_action( 'homepage', 'lwr_where_we_work_section', 30);
+		// add_action( 'homepage', 'lwr_where_we_work_section', 30);
 	}
 	add_action( 'init', 'lwr_manipulate_homepage_elements', 3 );
 
-	function lwr_full_screen_video_banner() { ?>
+/*
+ * SELECT DONATION OPTION OR VIDEO BANNER
+ */
+	function lwr_hero_banner() {
+		$hero_banner = get_field('hero_banner');
+			
+		switch($hero_banner) {
+			case 'donate' : 
+				lwr_featured_donation_option();
+				break;
+			case 'video' :
+				lwr_full_screen_video_banner();
+				break;
+		}
+
+	}
+
+	
+	function lwr_featured_donation_option() {
+			?>
+			<section class="jumbotron jumbotron-fluid" id="hero_image" style="background-image: url('<?php echo esc_url( get_field('hero_image') ); ?>');" >
+					<div class="overlay"></div>
+					<div class="container">
+							<h2 class="display-3"><?php	echo esc_attr( get_field('donate_heading') ); ?></h2>
+							<p class="lead"><?php echo esc_attr( get_field( 'donate_description' ) ); ?></p>
+							<form method="get">
+									<input type="number" name="nyp" data-cip-id="nyp" placeholder="Donation Amount ($)" />
+									<input type="hidden" name="add-to-cart" value="<?php echo esc_attr( get_field( 'homepage_donate_product' ) ); ?>" />
+									<button type="submit" class="btn btn-outline-secondary btn-lg">Quick Donate</button>
+							</form>
+							<p><a href="<?php 
+								$permalink_id = get_field( 'homepage_donate_product' ); 
+								the_permalink( $permalink_id ); 
+								?>">Learn more&raquo;</a></p>
+					</div>
+			</section>
+						<?php
+	}
+
+	function lwr_full_screen_video_banner() { 
 				
-		<a href="<?php echo 'http://www.youtube.com/watch?v=' . esc_attr(get_option('homepage_video_link')); ?>" target="_blank" class="has-full-width-image" id="homepage-top-banner" onClick="ga('send', 'event', 'Video', 'play', 'Homepage');" >
-			<iframe id="yt-player" src="https://www.youtube.com/embed/<?php echo esc_attr(get_option('homepage_video_link')); ?>?enablejsapi=1&origin=<?php echo get_site_url(); ?>&start=25&modestbranding=1&showinfo=0&rel=0" width="100%" height="548" frameborder="0" allowfullscreen></iframe>
+		$iframe = get_field('home_video_url');
+		// use preg_match to find iframe src
+		preg_match('/src="(.+?)"/', $iframe, $matches);
+		$src = $matches[1];		
+		
+		// add extra params to iframe src
+		$params = array(
+				'controls'    		=> 0,
+				'enablejsapi' 		=> 1,
+				'start' 					=> 25,
+				'modestbranding' 	=> 1,
+				'showinfo'        => 0,
+				'rel'    					=> 0
+		);
+		$new_src = add_query_arg($params, $src);
+		$iframe = str_replace($src, $new_src, $iframe);
+		
+		// add extra attributes to iframe html
+		$attributes = 'frameborder="0" allowfullscreen id="yt-player"';
+		$iframe = str_replace('></iframe>', ' ' . $attributes . '></iframe>', $iframe); ?>
+				
+		<a href="<?php echo 'http://www.youtube.com/watch?v=' . esc_attr(get_field('homepage_video_link')); ?>" target="_blank" class="has-full-width-image" id="homepage-top-banner" onClick="ga('send', 'event', 'Video', 'play', 'Homepage');" >
+			<?php echo $iframe; ?>
 			<script type="text/javascript">
 			var tag = document.createElement('script');
 				tag.src = 'https://www.youtube.com/iframe_api';
@@ -53,19 +114,31 @@
 			</script>
 	
 			<!-- <img src="<?php // echo esc_attr(get_option('homepage_video_image')); ?>" alt="" /> -->
-			<h2><span class="tagline"><?php echo esc_attr(get_option('homepage_video_excerpt')); ?></span><div class="vidlink"><?php echo esc_attr(get_option('homepage_video_instruction')); ?></div></h2>
+			<h2><span class="tagline"><?php echo esc_attr(get_field('home_video_heading')); ?></span><div class="vidlink"><?php echo esc_attr(get_field('video_cta')); ?></div></h2>
 		</a> 
-	<?php }
+	<?php 
+	}
 
 	function lwr_reach_of_support_section() { ?>
 		<div class="animated-object" id="reach-of-support">
-			<h2>In <?php echo esc_attr(get_option('homepage_support_year')); ?>, your support of Lutheran World Relief reached:</h2>
-			<div><a href="/what-we-do"><img src="<?php echo get_stylesheet_directory_uri() . '/img/people-icon.png'; ?>" alt="People" /></a><strong><?php $year = esc_attr(get_option('homepage_support_people'));
+			<?php the_content(); ?>
+			<h3>In <?php echo esc_attr(get_option('homepage_support_year')); ?>, your support of Lutheran World Relief reached:</h3>
+			<div><a href="/what-we-do"><img src="<?php echo get_stylesheet_directory_uri() . '/img/people-icon.png'; ?>" alt="People" /></a><strong><?php $year = get_field('btn_people_helped');
 						echo number_format( $year, 0, '',','); ?></strong> People</div>
-			<div><a href="/what-we-do"><img src="<?php echo get_stylesheet_directory_uri() . '/img/countries-icon.png'; ?>" alt="Countries" /></a><strong><?php echo esc_attr(get_option('homepage_support_countries')); ?></strong> Countries</div>
-			<div><a href="/what-we-do"><img src="<?php echo get_stylesheet_directory_uri() . '/img/projects-icon.png'; ?>" alt="Projects" /></a><strong><?php echo esc_attr(get_option('homepage_support_projects')); ?></strong> Projects</div>
+			<div><a href="/what-we-do"><img src="<?php echo get_stylesheet_directory_uri() . '/img/countries-icon.png'; ?>" alt="Countries" /></a><strong><?php echo esc_attr(get_field('btn_countries')); ?></strong> Countries</div>
+			<div><a href="/what-we-do"><img src="<?php echo get_stylesheet_directory_uri() . '/img/projects-icon.png'; ?>" alt="Projects" /></a><strong><?php echo esc_attr(get_field('btn_projects')); ?></strong> Projects</div>
 		</div>
-	<?php }
+	<?php 
+	}
+	
+	function lwr_email_capture() {
+		?>
+		<section id="MailChimp" style="width: 100%; background-color: #74c3e4; color: #fff; text-align:center;">
+		<h2>Good News Delivered To Your Inbox</h2>
+		<?php get_template_part('inc/custom', 'enews-signup'); ?>
+		</section>
+		<?php
+	}
 
 	function lwr_featured_blog_post() {
 		$meta_query   = WC()->query->get_meta_query();		

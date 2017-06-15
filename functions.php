@@ -32,9 +32,16 @@
  	 *****************************************************/
 add_action('wp_enqueue_scripts', 'add_scripts_lwr_custom');
 	function add_scripts_lwr_custom() {
-	wp_enqueue_script( 'lwr_custom_script', get_stylesheet_directory_uri() . '/js/lwr_custom_script_min.js', array( 'jquery' ), '2.0.2', true );
-	wp_enqueue_script( 'twitter', 'https://platform.twitter.com/widgets.js', array(), false, true );
-	wp_enqueue_script( 'typekit', '//use.typekit.net/kwb3xis.js' );
+		/* Ensures browser lists updated theme's CSS version */
+		$child_theme_data = wp_get_theme();
+		
+		wp_deregister_style( 'storefront-child-style' );
+		wp_register_style( 'storefront-child-style', get_stylesheet_directory_uri() . '/style.css', array('storefront-style', 'storefront-woocommerce-style'), $child_theme_data->Version );
+		wp_enqueue_style( 'storefront-child-style' );
+		
+		wp_enqueue_script( 'lwr_custom_script', get_stylesheet_directory_uri() . '/js/lwr_custom_script_min.js', array( 'jquery' ), '2.0.2', true );
+		wp_enqueue_script( 'twitter', 'https://platform.twitter.com/widgets.js', array(), false, true );
+		wp_enqueue_script( 'typekit', '//use.typekit.net/kwb3xis.js' );
 	
 	if (is_page('dmel-framework')) { 
 		wp_enqueue_style('bootstrap', get_stylesheet_directory_uri() . '/css/bootstrap.min.css' );
@@ -169,10 +176,10 @@ function custom_add_to_cart_text() {
 
 	
 /**********************************************
-		DIALOG FOR THRIVENT MATCH DAY
+		DIALOG FOR EMAIL CAPTURE
 	**********************************************/
 	function enqueue_jquery_dialog() {
-		if (get_option('modal_toggle') == 'on') {
+		if (get_option('modal_toggle') == 'on' && is_front_page() ) {
 			wp_enqueue_script('jquery-ui-dialog','', array('jquery','jquery-ui-core'), false, true );
 			wp_enqueue_script('jquery-cookie', '', array('jquery'), false, true );
 			// wp_enqueue_script('MC Validation', '//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js', array('lwr_dialog') ,false, true);
@@ -183,7 +190,7 @@ function custom_add_to_cart_text() {
 	
 	function add_jquery_dialog() {
 		
-		if (get_option('modal_toggle') == 'on') { ?>
+		if (get_option('modal_toggle') == 'on' && is_front_page() ) { ?>
 		<div id="dialog">
 				<div id="dialog-text">
 				<h2><?php echo esc_attr( get_option('modal_title') ); ?></h2>
@@ -225,6 +232,11 @@ function custom_add_to_cart_text() {
 				width: 60%;
 				margin-left: 10%;
 			}
+			@media screen and (max-width: 500px) {
+				.ui-dialog .mc-field-group {
+					margin-left: 0;
+				}
+			}
 			#dialog-text input[type=email] {
 				width: 100%;
 			}
@@ -260,4 +272,58 @@ function custom_add_to_cart_text() {
 	}
 	add_action('woocommerce_single_product_summary', 'custom_add_charity_badges', 1 );
 	
+	
+/***********************************************
+	Add Custom Ask Amount Buttons to Product Pages
+	**********************************************/
+	function lwr_custom_ask_amounts($product) {
+		global $product;
+		$product_id = $product->get_id();
+		if( have_rows('custom_ask_amounts') ) : ?>
+			<div class="custom_ask_amounts">
+				<?php
+			while( have_rows('custom_ask_amounts') ) : the_row();
+				
+				$ask_amount = get_sub_field('ask_amount');
+				?>
+				<a href="?add-to-cart=<?php echo esc_attr($product_id); ?>&amp;nyp=<?php echo esc_attr($ask_amount); ?>" class="button alt" onClick="ga('send', 'event', 'UX', 'click', 'Quick Donate', '<?php echo esc_attr( $ask_amount ); ?>')" >$<?php echo esc_attr( $ask_amount ); ?></a> <?php
+			
+			endwhile; ?>
+			</div><?php
+		endif;
+	}
+	add_action('woocommerce_before_add_to_cart_form', 'lwr_custom_ask_amounts' );
+	
+/*****************************************************
+	Replace WooCommerce Images with Custom Giving Page Images
+	****************************************************/
+
+	add_action( 'woocommerce_before_single_product_summary', 'lwr_show_product_images', 10 );
+	function lwr_show_product_images() {
+		
+		$toggle_image = get_field('background_image');
+
+		if ( isset($toggle_image) && $toggle_image == true ) {
+			
+			remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20);
+			$image_url = get_the_post_thumbnail_url( $post->ID, 'full');
+			?>
+			<div class="full-width-product" style="background-image: url('<?php the_post_thumbnail_url(); ?>');" >
+			<div class="overlay"></div>
+			<?php 
+		}
+	}
+
+	add_action( 'woocommerce_after_single_product_summary', 'lwr_after_product_images', 5 );
+	function lwr_after_product_images() {
+		
+		$toggle_image = get_field('background_image');
+
+		if ( isset($toggle_image) && $toggle_image == true ) {
+
+		?></div> <!-- End Full-Width Product -->
+		<div class="caption"><?php the_post_thumbnail_caption(); ?></div>
+		<?php
+		}
+	}
 ?>

@@ -11,7 +11,22 @@
 		</nav>
 	<?php }
 
-
+	/*****************************************************
+			Test for Advanced Custom Fields Options Page
+	*****************************************************/
+	if( function_exists('acf_add_options_page') ) {
+	
+		acf_add_options_page(array(
+			'page_title' 	=> 'Site Alert Settings',
+			'menu_title'	=> 'Alert Settings',
+			'menu_slug' 	=> 'alert-settings',
+			'capability'	=> 'edit_others_posts',
+			'redirect'		=> false,
+			'icon_url' 		=> 'dashicons-megaphone'
+		));
+	
+	}
+	
 	/************************************************
 			Header Title & Image & Video
 	 ************************************************/
@@ -225,8 +240,8 @@
 			<strong>Password:</strong> 2012BSC</small></p>
 		</div>
 		<div class="col-xs-12 col-sm-6 col-md-4">
-			<h3>Fair Trade Accounts</h3>
-			<a class="button" href="https://shop.equalexchange.coop/lwrcoffee/customer/account/login/">Log into Equal Exchange</a>
+			<h3>LWR Farmers Market Accounts</h3>
+			<a class="button" href="https://www.lwrfarmersmarket.org/customer-login">Log into the LWR Farmers Market</a>
 		</div>
 
 	<?php	}

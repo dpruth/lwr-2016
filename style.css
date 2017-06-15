@@ -3,7 +3,7 @@
 	Theme URI: http://lwr.org/wp-content/themes/lwr/
 	Template: storefront
 	Author: Lutheran World Relief | Dan Ruth
-	Version: 1.2.0
+	Version: 1.3.2
 	License: GNU General Public License v2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	Text Domain: storefront-child
@@ -54,7 +54,7 @@ div.page-section.shift > div.page-section-header > img { left: 6%; transform: ro
  ***********************/
 
 header > div.col-full { background-color: #fff; height: 156px; margin: 0; max-width: 100%; padding: 0; position: relative; width: 100%; }
-.site-header { padding-top: 0; }
+.site-header { padding-top: 0; border-bottom: none; }
 .site-header .site-branding, .site-header .site-logo-anchor, .site-header .site-logo-link, .woocommerce-active .site-header .secondary-navigation { margin: 0; width: auto; }
 .site-branding h1 { left: -9999px; position: absolute; top: -9999px; }
 
@@ -79,7 +79,7 @@ a#logo > img { display: inline-block; padding-top: 17px; vertical-align: top; wi
 
 div#donate-button { font-size: .8em; position: absolute; right: 35%; top: 30px; }
 div#donate-button > div { position: relative; }
-div#donate-button > div > a { font-weight: 700; }
+div#donate-button > div > a { font-weight: 700; font-size: 1.2em; padding: 13px; }
 div#donate-button > div > form { display: none; font-size: .9em; left: -38%; padding: 9px 15px; position: absolute; text-align: center; top: 90%; z-index: 4000; }
 div#donate-button:hover > div > form { display: block; }
 div#donate-button > div > form > input[type="radio"] { margin: 1px 2px 9px 6px; }
@@ -143,7 +143,7 @@ nav#site-navigation { background-color: #2a4467; bottom: 0; height: 31px; left: 
 
 .main-navigation ul.menu li ul li#menu-item-508 { background: url('img/mission-quilt-135x135.jpg') top left no-repeat; min-height: 135px; padding-left: 135px; }
 .main-navigation ul.menu li ul li#menu-item-7859 { background: url('img/schoolkit.png') top left no-repeat; min-height: 135px; padding-left: 118px; }
-.main-navigation ul.menu li ul li#menu-item-517 { background: url('img/organic-coffee-cans-sisters-blend_1.jpg') top left no-repeat; min-height: 135px; padding-left: 104px; }
+.main-navigation ul.menu li ul li#menu-item-517 { background: url('img/LWR-Farmers-Market-Coffee.jpg') top left no-repeat; min-height: 135px; padding-left: 104px; }
 
 .main-navigation ul li:hover > ul li > ul, .secondary-navigation ul li:hover > ul li > ul { display: block; }
 
@@ -155,7 +155,8 @@ nav#site-navigation { background-color: #2a4467; bottom: 0; height: 31px; left: 
 .main-navigation ul.menu ul li ul li, .main-navigation ul.nav-menu ul li ul li { display: inline-block; margin: 0; width: 100%; }
 .main-navigation ul.menu ul li ul li a, .main-navigation ul.nav-menu ul li ul li a { color: #6683a1; font-size: .85em; font-weight: 400; padding: 0 6px; }
 
-.main-navigation ul.menu ul li.menu-item-has-children > a::after, .main-navigation ul.menu ul li.page_item_has_children > a::after,	.main-navigation ul.nav-menu ul li.menu-item-has-children > a::after, .main-navigation ul.nav-menu ul li.page_item_has_children > a::after { content: none; }
+.main-navigation ul.menu ul li.menu-item-has-children > a::after, .main-navigation ul.menu ul li.page_item_has_children > a::after,	.main-navigation ul.nav-menu ul li.menu-item-has-children > a::after, .main-navigation ul.nav-menu ul li.page_item_has_children > a::after { content: none !important; }
+
 
 .main-navigation ul.menu > li > ul:hover li ul a:hover, .main-navigation ul.nav-menu > ul:hover li ul a:hover, .main-navigation ul.nav-menu ul li:hover>a:hover { background-color: #47cdcc; color: #fff; }
 .main-navigation ul.menu > li > ul:hover a, .main-navigation ul.nav-menu ul li:hover>a { background-color: #fff; } 
@@ -169,7 +170,9 @@ nav#site-navigation { background-color: #2a4467; bottom: 0; height: 31px; left: 
 
 .site-header-cart .widget_shopping_cart, .main-navigation ul.menu ul.sub-menu, .main-navigation ul.nav-menu ul.children {	background-color: #FFF;}
 
-.main-navigation ul li a, .site-title a, ul.menu li a, .site-branding h1 a, .site-footer .storefront-handheld-footer-bar a:not(.button), button.menu-toggle, button.menu-toggle:hover {  color: #fff; }
+.main-navigation ul li a, .site-title a, ul.menu li a, .site-branding h1 a, button.menu-toggle, button.menu-toggle:hover {  color: #fff; }
+
+.site-footer .storefront-handheld-footer-bar a:not(.button), .storefront-handheld-footer-bar ul li.cart .count { color: #274162 !important; }
 .storefront-handheld-footer-bar ul li.cart .count, button.menu-toggle:after, button.menu-toggle:before,	button.menu-toggle span:before {	background-color: #fff;	}
 
 /** EMERGENCY PANEL **/
@@ -219,7 +222,26 @@ ul#menu-footer-menu li ul.sub-menu li { display: list-item; float: none; width: 
 	HOMEPAGE ELEMENTS
  *************************************/
 
-.page-template-template-homepage .site-main { padding-top: 0; }
+.page-template-template-homepage .site-main, .page-template-template-homepage:not(.has-post-thumbnail) .site-main { padding-top: 0; } /* Fix for Storefront theme */
+
+
+/** QUICK DONATE BANNER **/
+.jumbotron { margin-bottom: 0px; }
+#hero_image { position: relative; background-size: cover; background-attachment: fixed; padding: 8rem 2rem; margin-bottom: 6rem; }
+.overlay {position: absolute; width: 100%; height: 100%; background: linear-gradient(170deg, rgba(0,173,161,0.65) 0%, #274162 100%); opacity: 0.65; top: 0; left: 0;  }
+#hero_image .container {position: relative; margin-left: auto; margin-right: auto; padding-right: 15px; padding-left: 15px; max-width: 100%; width: 93.75%; color: #fff; text-shadow: rgba(0,0,0,0.65) 0 0 1em; } 
+@media (min-width: 576px) { #hero_image .container { width: 540px; max-width: 100%; } }
+@media (min-width: 768px) { #hero_image .container { width: 720px; max-width: 100%; } }
+@media (min-width: 992px) { #hero_image .container { width: 960px; max-width: 100%; } }
+@media (min-width: 1200px) { #hero_image .container { width: 1140px; max-width: 100%; } }
+
+#hero_image h2.display-3 { color: #fff; font-size: 4.5rem; font-weight: 300; line-height: 1.1; margin-bottom: 0.5rem;}
+#hero_image p.lead { font-size: 1.25rem; font-weight: 300; margin-bottom:1rem; }
+#hero_image input { padding: .6180469716em; background-color: #f7f7f9; border: none; }
+#hero_image button[type="submit"] { color: #fff; background-image: none; background-color: transparent; border: 1px solid #fff; border-radius: 0.3rem; padding: 0.75rem 1.5rem; font-size: 1.25rem; transition: all 0.2s ease-in-out; }
+#hero_image button[type="submit"]:active,#hero_image button[type="submit"]:hover { color: #00ada1; background-color: #fff; border-color: #fff; }
+#hero_image a { color: #fff; }
+
 
 /** TOP VIDEO BANNER **/
 a#homepage-top-banner { background-color: #000; display: block; height: 508px; margin-bottom: 54px; }
@@ -234,14 +256,25 @@ a#homepage-top-banner.vidplaying > h2 { bottom: 100%; }
 a#homepage-top-banner.vidplaying > img { top: 100%; }
 
 /** REACH OF SUPPORT **/
-div#reach-of-support { color: #103a4a; margin: 0 auto 72px; text-align: center; width: 70%; }
-div#reach-of-support > h2 { line-height: 18px; padding: 0 5%; }
+div#reach-of-support { color: #103a4a; margin: 0 auto 72px; text-align: center; width: 90%; }
+div#reach-of-support > h2 { line-height: 1em; padding: 0; }
 div#reach-of-support > div { display: inline-block; font-size: 1.2em; line-height: 1.2em; width: 33%; }
 div#reach-of-support > div img { display: block; height: 140px; margin: 0 auto; transition: transform .6s; width: 131px; }
 div#reach-of-support > div:nth-of-type(2) img { transition: transform .6s ease-in-out .17s; }
 div#reach-of-support > div:nth-of-type(3) img { transition: transform .6s ease-in-out .34s; }
 div#reach-of-support.shift > div img { transform: rotateY(360deg); }
 div#reach-of-support > div > strong { color: #d45b30; display: block; font-size: 1.4em; margin-top: 10px; }
+
+
+/** Email Capture **/
+#MailChimp { background-color: #74c3e4;	padding: 3em 0;	color: #fff; text-align: center;}
+#MailChimp h2 { color: #fff; }
+#MailChimp form { width: 800px; max-width: 100%; margin: 0 auto 3em; }
+#MailChimp input[type="email"] { width: 80%; float:left; margin-right: 12px; }
+@media (max-width: 700px) {
+	#MailChimp input[type="email"] { width: 60%; }
+}
+#MailChimp input[type="submit"] { float:left; }
 
 /** FEATURED BLOG POST **/
 a#featured-blog-post { display: block; height: 570px; }
@@ -619,6 +652,15 @@ p.addon-wrap-138-honormemorial-information-2, p.addon-wrap-6261-honormemorial-in
 
 .order_item > .product-name > .variation dt:nth-of-type(n+2), .single-product div.product .product_meta { display:none; }
 
+.product_cat-donate .quantity, .product_cat-emergency-donation .quantity { display: none; }
+.product_cat-donate .nyp, .product_cat-emergency-donation .nyp { float: left; }
+.custom_ask_amounts a { font-size: 1.2em; }
+
+.single-product .full-width-product {	height: calc(100vw * .75);	width: 100%; position: relative;	background-size: cover;	background-attachment: fixed;	}
+.single-product .full-width-product div.entry-summary {	position: relative;	padding: 2em; color: #fff; text-shadow: 0 0 1em rgba(0,0,0,0.75);	}
+.single-product .full-width-product div.entry-summary h1 { color: #fff;	}
+.single-product .full-width-product div.entry-summary a:not(.button) {	color: #fff;	text-decoration: underline; }
+
 
 /*****************************************
   STORIES PAGE
@@ -711,6 +753,10 @@ h1.faith-in-action { text-indent: -99999px; background: url('img/FIA-Logo.png') 
 /** Override WP media query **/
 @media screen and (max-width: 65.141em) { .col-full { margin: 0; } }
 
+
+@media screen and (min-width: 998px) {
+	.single-product .full-width-product { max-height: 80vh;	}
+}
 @media screen and (max-width: 890px) {
   .horizontal-list, #stay-informed #signup { padding-bottom: 40px; }
   .horizontal-list > h2 { font-size: 1.8em; }
@@ -750,9 +796,10 @@ h1.faith-in-action { text-indent: -99999px; background: url('img/FIA-Logo.png') 
 
   /** Non-Homepage **/
   .hentry .entry-header { font-size: .85em; height: 250px; }
+	
+	.single-product .full-width-product {	min-height: calc(100vw * .75); height: auto;	} 
+	.single-product .full-width-product div.entry-summary {	right: 0; width: 100%; margin-bottom: 0;	}
 
-  /** Product Page **/
-  .single-product div.product { font-size: .9em; }
 
 }
 
@@ -810,8 +857,8 @@ h1.faith-in-action { text-indent: -99999px; background: url('img/FIA-Logo.png') 
   a#homepage-top-banner > h2 > span.tagline { padding-left: 1%; }
   a#homepage-top-banner > h2 > div:before { height: 22px; text-indent: 0; transition: 0s; width: 22px;  }
   a#featured-blog-post > img, a#featured-blog-post:hover > img { top: 0; left: 0; transition: 0s; width: 100%; }
-  a#featured-blog-post > h2 { background-color: #316f7a; transition: padding 0s; }
-  a#featured-blog-post > h2, a#featured-blog-post:hover > h2 { font-size: 1.2em; padding: 15px 0 60px 8%;  }
+  a#featured-blog-post > h2 { transition: padding 0s; }
+  a#featured-blog-post > h2, a#featured-blog-post:hover > h2 { padding: 15px 0 60px 8%;  }
   a#featured-blog-post > h2 > span { transition: 0s; }
   a#featured-blog-post:hover > h2 > span { letter-spacing: 0; text-indent: 0; }
 	a#featured-blog-post p, a#featured-blog-post:hover p { padding: 0 0 11px 8%; font-size: 1em; line-height: 1em; transition: padding 0s;}
@@ -907,7 +954,9 @@ h1.faith-in-action { text-indent: -99999px; background: url('img/FIA-Logo.png') 
 
   /** Homepage **/
   a#featured-blog-post { height: 220px; }
-  a#featured-blog-post > h2, a#featured-blog-post:hover > h2 { font-size: 1em; line-height: 17px; padding: 8px 52% 60px 4%; }
+  a#featured-blog-post > h2, a#featured-blog-post:hover > h2 { line-height: 17px; padding: 1em 8%; top: 0 }
+	#hero_image { padding-top: 4rem; }
+	#hero_image h2.display-3 { font-size: 3rem; }
 
   /** Non-Homepage **/
   .hentry .entry-header h1 { line-height: 1em; }
@@ -920,9 +969,7 @@ h1.faith-in-action { text-indent: -99999px; background: url('img/FIA-Logo.png') 
   div#country-contact-info > div > div { width: 48%; }
 
   /** Product Page **/
-  .single-product div.product { font-size: .75em; }
-  .single-product div.product div.images img { width: 76%; }
-  .single-product div.product div.summary h1 { font-size: 1.8em; }
+	.custom_ask_amounts a { width: 100%; clear:both; margin-bottom: 5px; text-align: center; }
 
 }
 
@@ -939,8 +986,6 @@ h1.faith-in-action { text-indent: -99999px; background: url('img/FIA-Logo.png') 
   a#homepage-top-banner > h2 > span.tagline { padding-left: 0; width: 50%; }
   a#homepage-top-banner > h2 > div { padding-right: 5%; }
   a#homepage-top-banner > h2 > div:before { height: 15px; width: 14px;}
-  a#featured-blog-post { height: 160px; }
-  a#featured-blog-post > h2, a#featured-blog-post:hover > h2 { font-size: .95em; padding: 6px 32% 60px 4%; }
 
   .main-navigation ul.menu { font-size: .8em; }
   .main-navigation ul.menu > li > ul li a, .main-navigation ul.nav-menu ul li a { padding: 2px 1px; }
@@ -1684,6 +1729,7 @@ h1.faith-in-action { text-indent: -99999px; background: url('img/FIA-Logo.png') 
 		min-height: 500px;
 	}
 }
+
 .ui-dialog .ui-dialog-titlebar {
 				position: relative;
 				z-index: 995;
@@ -1739,6 +1785,12 @@ h1.faith-in-action { text-indent: -99999px; background: url('img/FIA-Logo.png') 
 	margin: -10px 0 0 0;
 	padding: 1px;
 	height: 20px;
+}
+
+@media screen and (max-width: 500px) {
+	.ui-dialog { background-image: none !important;	}
+	#dialog-text { padding-top: 0; }
+	#dialog-text p { display: none; }
 }
 .ui-icon {
 	width: 16px;

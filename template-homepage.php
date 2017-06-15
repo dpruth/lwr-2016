@@ -18,7 +18,9 @@ get_header(); ?>
 		<main id="main" class="site-main" role="main">
 
 			<?php
-
+				while(have_posts() ) :
+					the_post();
+			
 			/**
 			 * @hooked storefront_homepage_content - 10
 			 * @hooked storefront_product_categories - 20
@@ -27,7 +29,9 @@ get_header(); ?>
 			 * @hooked storefront_popular_products - 50
 			 * @hooked storefront_on_sale_products - 60
 			 */
-			do_action( 'homepage' ); ?>
+			do_action( 'homepage' ); 
+			
+			endwhile; ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->

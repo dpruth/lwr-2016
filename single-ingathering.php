@@ -39,7 +39,7 @@ get_header(); ?>
 					
 					get_template_part( 'inc/custom', 'ingathering-location' );
 							
-					wp_reset_query();
+					
 
 					$fields=get_fields($id);
 					//print_r($fields);
@@ -120,7 +120,7 @@ get_header(); ?>
 					
 					if ( !empty($upload) ) { ?>
 					<p><a href="<?php echo $upload['url']; ?>" class="button">Download More Information (PDF)</a></p>
-					<? } ?>
+					<?php } ?>
 				</div>
 				
 			</article><!-- #post-## -->
@@ -151,9 +151,10 @@ get_header(); ?>
 			 * @hooked storefront_post_nav - 10
 			 */
 			do_action( 'storefront_single_post_after' );
-			?>
+			
 
-		<?php endwhile; // end of the loop. ?>
+		 endwhile; // end of the loop. 
+			wp_reset_postdata(); ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
