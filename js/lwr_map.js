@@ -31,10 +31,11 @@ function addPointtoMap(x, y) {
                             "esri/layers/GraphicsLayer",
                             "esri/dijit/PopupTemplate",
                             "esri/dijit/InfoWindow",
+														"esri/dijit/Search",
                             "esri/geometry/Extent",
                             "dojo/domReady!"
                         ], function (
-                                Map, InfoTemplate, PictureMarkerSymbol, Point, Graphic, Color, GraphicsLayer, PopupTemplate, InfoWindow, Extent
+                                Map, InfoTemplate, PictureMarkerSymbol, Point, Graphic, Color, GraphicsLayer, PopupTemplate, InfoWindow, Search, Extent
                                 ) {
                             map = new Map("mapDiv", {
                                 center: [-56.049, 32.485],
@@ -62,6 +63,7 @@ function addPointtoMap(x, y) {
                             map.on("load", function () {
                                 map.disableScrollWheelZoom();
                             });
+
                             agraphicsLayer = new GraphicsLayer({
                                 "infoTemplate": infoTemplate
                             });
@@ -96,6 +98,7 @@ function addPointtoMap(x, y) {
 																// symbol.setWidth(26);																
                                 agraphicsLayer.add(new Graphic(pt, symbol, feature, infoTemplate));
                             });
+																												
                             var theExtent = new Extent({
                                 "xmin": xmin + 1,
                                 "ymin": ymin + 1,
