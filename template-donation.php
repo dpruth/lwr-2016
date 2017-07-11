@@ -10,20 +10,15 @@
 get_header(); ?>
 
 	<div id="primary" class="content-area single-product">
-		<main id="main" class="site-main" role="main">
-		<div itemscope itemtype="http://schema.org/Product" class="product type-product">
+		<main id="main" class="site-main container mt-5" role="main">
+		<div itemscope itemtype="http://schema.org/Product" class="product type-product row">
 
 		<?php while ( have_posts() ) : the_post(); ?>
 
-			<?php
-
-			do_action( 'woocommerce_before_single_product' );
-
-			?>
-			<div class="images">
+			<div class="col-md-4">
 				<?php the_post_thumbnail('medium'); ?>
 			</div>
-			<div class="summary entry-summary">
+			<div class="summary entry-summary col-md-8">
 				<h1 itemprop="name" class="product_title entry-title"><?php the_title(); ?></h1>
 				<?php the_content(); ?>
 			</div>

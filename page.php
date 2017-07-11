@@ -12,29 +12,31 @@
 
 get_header();
 
-$container   = get_theme_mod( 'lwr_container_type' );
-$sidebar_pos = get_theme_mod( 'lwr_sidebar_position' );
-
 ?>
 
-<main class="site-main" id="main">
+<main class="site-main container-fluid" id="main">
 	<div class="row">
 				<?php while ( have_posts() ) : the_post(); ?>
 
 					<?php	get_template_part( 'loop-templates/content', 'page' ); ?>
 
+					<?php
+					// If comments are open or we have at least one comment, load up the comment template.
+					if ( comments_open() || get_comments_number() ) :
+						comments_template();
+					endif;
+					?>
 
 				<?php endwhile; // end of the loop. ?>
 	</div>
 </main><!-- #main -->
 
-					<?php
-						get_template_part( 'template-parts/custom', 'videos' );
-						get_template_part( 'template-parts/projects', 'location' );
-						get_template_part( 'template-parts/projects', 'current' );
-						get_template_part( 'template-parts/related', 'resources' );
-						get_template_part( 'template-parts/contact', 'info' );
-					?>
+					<?php	// Get additional template parts for Agriculture, Climate & EOps pages
+								if ( is_page( array(55, 386, 388) ) ) {
+									get_template_part( 'template-parts/projects', 'location' );		get_template_part( 'template-parts/related', 'resources' );
+								} ?>
+
+	<hr />
 
 
 <?php get_footer(); ?>

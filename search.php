@@ -2,78 +2,73 @@
 /**
  * The template for displaying search results pages.
  *
- * @package storefront
+ * @package lwr
  */
 
-get_header(); ?>
+get_header();
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+$container   = get_theme_mod( 'lwr_container_type' );
+$sidebar_pos = get_theme_mod( 'lwr_sidebar_position' );
+?>
 
-			<header class="entry-header">
-				<h1 class="entry-title"><?php printf( esc_attr__( 'Search Results for: %s', 'storefront' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
-			</header><!-- .page-header -->
+<div class="wrapper" id="search-wrapper">
 
-					<div class="entry-content" itemprop="mainContentOfPage">
-		<?php if ( have_posts() ) : 
-					// get_template_part( 'loop' );
-						while ( have_posts() ) : the_post();
-						
-						$title = get_the_title();	
-						
-						if ( 'product' == get_post_type() ) {
-							$prod_cats = get_the_terms( $post->ID, 'product_cat');
-							
-										foreach ($prod_cats as $prod_cat) {
-											$cat_parent = $prod_cat->parent;
-										}
-										if ($cat_parent != '0' ) {
-											$parent_cat = get_term_by( 'id', $cat_parent, 'product_cat' ); 
-											$cats = $parent_cat->name;
-											} else {
-												$cats = $prod_cat->name;
-												}
-							$the_title = $title . ' &mdash; ' . $cats;
-						} elseif ('project' == get_post_type() ) {
-								$countries = get_the_terms( $post->ID, 'country' );
-								$the_title = $countries[0]->name . ': ' . $title;
-						} elseif ('post' == get_post_type() ) {
-								$categories = get_the_category($post->ID);
-									foreach ($categories as $category){
-										$cat_parent = $category->parent;
-									}
-									if ($cat_parent != '0' ) {
-											$parent_cat = get_term_by( 'id', $cat_parent, 'product_cat' ); 
-											$cat = $parent_cat->name;
-											} else {
-												$cat = $category->name;
-												}
-								$the_title = $cat . ': ' . $title;
-						} else {
-							$the_title = $title;
-						}
-							if ( has_post_thumbnail() ) {
-								the_post_thumbnail( 'medium' );
-							} else {}
-							?>
-							<h2><a href="<?php the_permalink(); ?>"><?php echo esc_html($the_title); ?></a></h2>
-							<?php the_excerpt(); ?>
-							<p><small><a href="<?php the_permalink(); ?>"><?php the_permalink(); ?></a></small></p>
-							<hr />
-						<?php endwhile; ?>
-						<nav id="pagination"><?php echo paginate_links(); ?></nav>
-					
-					</div>
-		<?php 
-		else :
+	<div class="<?php echo esc_html( $container ); ?>" id="content" tabindex="-1">
 
-			get_template_part( 'content', 'none' );
+		<div class="row">
 
-		endif; ?>
+			<!-- Do the left sidebar check and opens the primary div -->
+			<?php get_template_part( 'global-templates/left-sidebar-check', 'none' ); ?>
 
-		</main><!-- #main -->
-	</section><!-- #primary -->
+			<main class="site-main" id="main">
 
-<?php
-do_action( 'storefront_sidebar' );
-get_footer();
+				<?php if ( have_posts() ) : ?>
+
+					<header class="page-header">
+						/* translators:*/
+							<h1 class="page-title"><?php printf( esc_html__( 'Search Results for: %s', 'lwr' ),
+								'<span>' . get_search_query() . '</span>' ); ?></h1>
+
+					</header><!-- .page-header -->
+
+					<?php /* Start the Loop */ ?>
+					<?php while ( have_posts() ) : the_post(); ?>
+
+						<?php
+						/**
+						 * Run the loop for the search to output the results.
+						 * If you want to overload this in a child theme then include a file
+						 * called content-search.php and that will be used instead.
+						 */
+						get_template_part( 'loop-templates/content', 'search' );
+						?>
+
+					<?php endwhile; ?>
+
+				<?php else : ?>
+
+					<?php get_template_part( 'loop-templates/content', 'none' ); ?>
+
+				<?php endif; ?>
+
+			</main><!-- #main -->
+
+			<!-- The pagination component -->
+			<?php lwr_pagination(); ?>
+
+		</div><!-- #primary -->
+
+		<!-- Do the right sidebar check -->
+		<?php if ( 'right' === $sidebar_pos || 'both' === $sidebar_pos ) : ?>
+
+			<?php get_sidebar( 'right' ); ?>
+
+		<?php endif; ?>
+
+	</div><!-- .row -->
+
+</div><!-- Container end -->
+
+</div><!-- Wrapper end -->
+
+<?php get_footer(); ?>

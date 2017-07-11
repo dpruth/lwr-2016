@@ -42,39 +42,18 @@ function lwr_add_isotope_script() {
 		<main id="main" class="site-main" role="main">
 			<article id="post-<?php the_ID(); ?>" class="hentry" itemscope="" itemtype="">
 
-					<?php	
-					
-					if (is_page('technical-profiles')){
-						$terms = 235; // term id (id of the media category)
-					}elseif(is_page('manuals-toolkits')){
-						$terms = 339; // term id (id of the media category)
-					}elseif(is_page('fact-sheets')){
-						$terms = 30; // term id (id of the media category)
-					}elseif(is_page('country-profiles')){
-						$terms = 32; // term id (id of the media category)
-					}elseif(is_page('evaluations')){
-						$terms = 338; // term id (id of the media category)							
-					}elseif(is_page('situation-reports')){
-						$terms = 29; // term id (id of the media category)
-					}else{}
-
-
-						add_action( 'storefront_page_before', 'lwr_add_breadcrumb', 3 );
-						do_action( 'storefront_page_before' );
-
-						?>
 						<div data-isotope>
 							<header class="entry-header">
-								<h1 class="entry-title" itemprop="nme"><?php the_title(); ?></h1>
+								<h1 class="entry-title m-5 " itemprop="nme"><?php the_title(); ?></h1>
 								<div class="resource-form-bar-wrapper">
-									<div class="resource-form-bar">
+									<div class="resource-form-bar container">
 										<form data-isotope-filters>
 											<div class="row">
-												<div class="col-xs-12 col-sm-6 col-lg-3 search-resources">
+												<div class="col-md-3 search-resources">
 													<label class="control-label">Search</label>
 													<input data-isotope-search class="form-control" placeholder="Enter a search term..."/><button data-isotope-submit class="btn btn-primary">Search</button>
 												</div>
-												<div class="col-xs-12 col-sm-6 col-lg-3">
+												<div class="col-md-3">
 													<label class="control-label">Filter by Country</label>
 													<select class="form-control" data-isotope-filter>
 			                      <option value="">All</option>
@@ -100,7 +79,7 @@ function lwr_add_isotope_script() {
 														<option value="uganda">Uganda</option>
 			                    </select>
 												</div>
-												<div class="col-xs-12 col-sm-6 col-lg-3">
+												<div class="col-md-3">
 													<label class="control-label">Filter by Topic</label>
 													<select class="form-control" data-isotope-filter>
 			                      <option value="">All</option>
@@ -111,7 +90,7 @@ function lwr_add_isotope_script() {
 														<option value="em-ops">Emergency Operations</option>
 			                    </select>
 												</div>
-												<div class="col-xs-12 col-sm-6 col-lg-3">
+												<div class="col-md-3">
 													<label class="control-label">Sort by Date</label>
 													<select class="form-control" data-isotope-sort="date">
 			                      <option value="DESC">Newest to Oldest</option>
@@ -125,11 +104,34 @@ function lwr_add_isotope_script() {
 								</div>
 							</header>
 							
-							<div class="entry-content">
+							<div class="entry-content container">
 								<p hidden data-isotope-search-result><span data-count></span> matches for "<span data-term></span>" <a data-isotope-search-clear href="#">Clear Search Term</a></p>
               	<p hidden data-isotope-placeholder>No items match your filters...</p>
 								<div class="row" data-isotope-container>
-							<?php
+
+			<?php						
+					switch ( $post->post_name ) {
+						case 'technical-profiles' :	
+							$terms = 235; // term id (id of the media category)
+							break;
+						case 'manuals-toolkits' : 
+							$terms = 339; // term id (id of the media category)
+							break;
+						case 'fact-sheets':
+							$terms = 30; // term id (id of the media category)
+							break;
+						case 'country-profiles':
+							$terms = 32; // term id (id of the media category)
+							break;
+						case 'evaluations':
+							$terms = 338; // term id (id of the media category)							
+							break;
+						case 'situation-reports': 
+							$terms = 29; // term id (id of the media category)
+							break;
+					}
+
+
 				if ( $terms != 29 ) { // Not Situation Reports		
 					$args = array(
 							'posts_per_page' => -1,
@@ -144,8 +146,7 @@ function lwr_add_isotope_script() {
 							)
 						);
 					$the_query = new WP_Query($args);
-					if ( $the_query->have_posts() ) {
-
+					if ( $the_query->have_posts() ) { 
 
 							while($the_query->have_posts() ) {
 							$the_query->the_post();
@@ -164,33 +165,37 @@ function lwr_add_isotope_script() {
 										$country_list[] = $country->slug;
 									}
 								}
-								?><div class="col-xs-12 col-sm-6 col-md-4" data-isotope-item data-item-filter="<?php echo implode(',',$sector_list); ?><?php if(!empty($sector_list)){ echo ','; } ?><?php echo implode(',',$country_list); ?>" data-date-sort="<?php echo date("m/d/y H:i:s", strtotime($post->post_date)); ?>">
+								
+						?>
+
+								<div class="col-sm-6 col-md-4 card" data-isotope-item data-item-filter="<?php echo implode(',',$sector_list); ?><?php if(!empty($sector_list)){ echo ','; } ?><?php echo implode(',',$country_list); ?>" data-date-sort="<?php echo date("m/d/y H:i:s", strtotime($post->post_date)); ?>">
 									<a href="<?php the_permalink(); ?>"><?php
 									if ( has_post_thumbnail() ) {
-										the_post_thumbnail( 'medium' );
+										echo get_the_post_thumbnail( $post->ID, 'medium', array('class'=>'card-img-top') );
 									} else {
-										$thumbnail = wp_get_attachment_image( get_the_id(), 'medium', false, array('class' => 'wp-post-image' ) );
+										$thumbnail = wp_get_attachment_image( get_the_id(), 'medium', false, array('class' => 'card-img-top' ) );
 										if ( !empty($thumbnail) ) {
 											echo $thumbnail;
 										} else {		
-											echo '<img src="' . get_stylesheet_directory_uri() . '/img/pdf_icon_960_720.png" />';
+											echo '<img src="' . get_stylesheet_directory_uri() . '/img/pdf_icon_960_720.png" class="card-img-top" />';
 										}
 									} ?></a>
-									<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></h3></a>
-									<p><?php echo esc_html( get_the_excerpt() ); ?></p>
-									<a href="<?php echo $post->guid; ?>" target="_blank" class="button product_type_simple add_to_cart_button">Download</a>
+									<div class="card-block">
+										<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></h3></a>
+										<p class="card-text"><?php echo wp_strip_all_tags( get_the_excerpt() ); ?></p>
+										<a href="<?php echo $post->guid; ?>" target="_blank" class="btn btn-primary product_type_simple add_to_cart_button">Download</a>
+									</div>
 								</div><?php
 							}
 							wp_reset_postdata();
-							?><div class="clearfix"></div>
+							?>
+								<div class="clearfix"></div>
 							</div><!-- END OF ROW -->
 							<hr class="clearfix" /><?php
 							
 							
 							//}
 						} else {
-							add_action( 'storefront_page_before', 'lwr_add_breadcrumb', 3 );
-							do_action( 'storefront_page_before' );
 							?><header class="entry-header"><h1 class="entry-title" itemprop="nme"><?php the_title(); ?></h1></header><div class="entry-content"><p>No resources found.</p><?php
 							
 						}
@@ -232,21 +237,23 @@ function lwr_add_isotope_script() {
 										$country_list[] = $country->slug;
 									}
 								}
-								?><div class="col-xs-12 col-sm-6 col-md-4" data-isotope-item data-item-filter="<?php echo implode(',',$sector_list); ?><?php if(!empty($sector_list)){ echo ','; } ?><?php echo implode(',',$country_list); ?>" data-date-sort="<?php echo date("m/d/y H:i:s", strtotime($post->post_date)); ?>">
+								?><div class="col-xs-12 col-sm-6 col-md-4 card" data-isotope-item data-item-filter="<?php echo implode(',',$sector_list); ?><?php if(!empty($sector_list)){ echo ','; } ?><?php echo implode(',',$country_list); ?>" data-date-sort="<?php echo date("m/d/y H:i:s", strtotime($post->post_date)); ?>">
 									<a href="<?php the_permalink(); ?>"><?php
 									if ( has_post_thumbnail() ) {
-										the_post_thumbnail( 'medium' );
+										echo get_the_post_thumbnail( $post->ID, 'medium', array('class'=>'card-img-top') );
 									} else {
-										$thumbnail = wp_get_attachment_image( get_the_id(), 'medium', false, array('class' => 'wp-post-image' ) );
+										$thumbnail = wp_get_attachment_image( get_the_id(), 'medium', false, array('class' => 'card-img-top' ) );
 										if ( !empty($thumbnail) ) {
 											echo $thumbnail;
 										} else {		
-											echo '<img src="' . get_stylesheet_directory_uri() . '/img/pdf_icon_960_720.png" />';
+											echo '<img src="' . get_stylesheet_directory_uri() . '/img/pdf_icon_960_720.png" class="card-img-top" />';
 										}
 									} ?></a>
-									<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></h3></a>
-									<p><?php echo esc_html( get_the_excerpt() ); ?></p>
-									<a href="<?php echo $post->guid; ?>" target="_blank" class="button product_type_simple add_to_cart_button">Download</a>
+									<div class="card-block">
+										<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></h3></a>
+										<p class="card-text"><?php echo wp_strip_all_tags( get_the_excerpt() ); ?></p>
+										<a href="<?php echo $post->guid; ?>" target="_blank" class="button product_type_simple add_to_cart_button">Download</a>
+									</div>
 								</div><?php
 							endwhile;
 							wp_reset_postdata();

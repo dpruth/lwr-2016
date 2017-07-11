@@ -1,40 +1,33 @@
-<?php 
+<?php
 /**
- * The template for displaying the SiteMap
+ * The template for displaying all pages.
  *
- * @package storefront
+ * This is the template that displays all pages by default.
+ * Please note that this is the WordPress construct of pages
+ * and that other 'pages' on your WordPress site will use a
+ * different template.
+ *
+ * @package lwr
  */
- 
- get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+get_header();
 
-		<?php while ( have_posts() ) : the_post(); ?>
+$container   = get_theme_mod( 'lwr_container_type' );
+$sidebar_pos = get_theme_mod( 'lwr_sidebar_position' );
 
-			<?php
+?>
 
-			do_action( 'storefront_single_post_before' ); 
-			
-			?>
+<main class="site-main container-fluid" id="main">
+	<div class="row">
+				<?php while ( have_posts() ) : the_post(); ?>
 
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope="" itemtype="http://schema.org/BlogPosting">
+		<div class="col-12">	
+			<header class="entry-header jumbotron">
+				<h1><?php the_title(); ?></h1>
+			</header>
 
-			<?php
-			
-				remove_action( 'storefront_single_post', 'storefront_post_header', 10 );
-				remove_action( 'storefront_single_post', 'storefront_post_meta', 20 );
-				remove_action( 'storefront_single_post', 'storefront_post_content', 30 );
-
-				add_action( 'storefront_single_post', 'lwr_add_breadcrumb', 3 );
-				add_action( 'storefront_single_post', 'lwr_add_page_header_image', 15 );
-				
-				do_action( 'storefront_single_post' );
-
-			?>
-
-		
-			<h2>Pages</h2>
+			<div class="container">			
+				<h2>Pages</h2>
 				<ul>
 					<?php	wp_list_pages(); ?>
 				</ul>
@@ -98,21 +91,21 @@
 						}					
 					?>
 				</ul>
-				
-			
-				
-</article><!-- #post-## -->
-		<?php 
-			/**
-			 * @hooked storefront_post_nav - 10
-			 */
-			do_action( 'storefront_single_post_after' );
-			?>
+					
+					<?php
+					// If comments are open or we have at least one comment, load up the comment template.
+					if ( comments_open() || get_comments_number() ) :
+						comments_template();
+					endif;
+					?>
 
-		<?php endwhile; // end of the loop. ?>
+				<?php endwhile; // end of the loop. ?>
+			</div>
+		</div>
+	</div>
+</main><!-- #main -->
 
-		</main><!-- #main -->
-	</div><!-- #primary -->
+	<hr />
 
-<?php do_action( 'storefront_sidebar' ); ?>
+
 <?php get_footer(); ?>
