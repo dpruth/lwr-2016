@@ -54,11 +54,11 @@ get_header();
 				</header>
 					<?php if ( have_posts() ) : 
 
-					get_template_part( 'inc/custom', 'ingathering-location' ); ?>
+					get_template_part( 'template-parts/ingathering', 'location' ); ?>
 						<br /><br />
 							<div data-isotope>
 								<div class="resource-form-bar-wrapper">
-									<div class="resource-form-bar">
+									<div class="resource-form-bar container">
 										<form data-isotope-filters>
 											<div class="row">
 												<div class="col-xs-12 col-sm-6 col-lg-3 search-resources">
@@ -140,7 +140,7 @@ get_header();
 									</div>
 								</div>
 
-						<div class="entry-content">
+						<div class="entry-content container">
 							<h2>Ingathering Locations</h2>
 								<p><em>Listed alphabetically by state</em></p>
 								<p hidden data-isotope-search-result><span data-count></span> matches for "<span data-term></span>" <a data-isotope-search-clear href="#">Clear Search Term</a></p>
@@ -171,12 +171,16 @@ get_header();
 											}
 																						
 								?>
-								<div class="col-xs-12 col-sm-6 col-md-4" data-isotope-item data-item-filter="<?php echo $state; ?><?php if(!empty($state)){ echo ','; } ?><?php echo $seasons_slugs; ?>" ><a href="<?php the_permalink(); ?>">
-									<h3><?php the_title(); ?></h3></a>
-									<p><?php echo $address; ?><br />
+								<div class="col-xs-12 col-sm-6 col-md-4 card" data-isotope-item data-item-filter="<?php echo $state; ?><?php if(!empty($state)){ echo ','; } ?><?php echo $seasons_slugs; ?>" >
+									<div class="card-block">
+										<h3 class="card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+										<p class="card-text"><?php echo $address; ?><br />
 										<?php echo $city . ', ' . $state . ' ' . $zip; ?></p>
-									<p>Season: <?php echo esc_html($seasons_name); ?></p>
-									<a href="<?php the_permalink(); ?>" class="button">Read More</a>
+										<a href="<?php the_permalink(); ?>" class="btn btn-primary">Read More</a>
+									</div>
+									<div class="card-footer">
+										<p><small>Season: <?php echo esc_html($seasons_name); ?></small></p>
+									</div>									
 								</div>
 							<?php
 								

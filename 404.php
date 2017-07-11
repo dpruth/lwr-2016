@@ -2,78 +2,82 @@
 /**
  * The template for displaying 404 pages (not found).
  *
- * @package storefront
+ * @package lwr
  */
 
-get_header(); ?>
+get_header();
+?>
+<div class="wrapper" id="404-wrapper">
 
-	<div id="primary" class="content-area">
+	<div class="container" id="content">
 
-		<main id="main" class="site-main" role="main">
+		<div class="row">
 
-			<div class="error-404 not-found">
+			<div class="content-area" id="primary">
 
-				<div class="page-content">
+				<main class="site-main" id="main" role="main">
 
-					<header class="page-header">
-						<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'storefront' ); ?></h1>
-					</header><!-- .page-header -->
+					<section class="error-404 not-found">
 
-					<p><?php esc_html_e( 'Nothing was found at this location. Try searching, or check out the links below.', 'storefront' ); ?></p>
+						<header class="page-header">
 
-					<?php
-					echo '<section aria-label="Search">';
+							<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.',
+							'lwr' ); ?></h1>
 
-					if ( is_woocommerce_activated() ) {
-						the_widget( 'WC_Widget_Product_Search' );
-					} else {
-						get_search_form();
-					}
-					
-					echo '</section>';
+						</header><!-- .page-header -->
 
-					echo '<div class="entry-content">';
-					echo do_shortcode( '[contact-form-7 id="10981" title="Report a Website Issue"]' );
-					echo '</div>';
+						<div class="page-content">
 
-					if ( is_woocommerce_activated() ) {
+							<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?',
+							'lwr' ); ?></p>
 
-						echo '<div class="fourohfour-columns-2">';
+							<?php get_search_form(); ?>
 
-							echo '<section class="col-1" aria-label="Promoted Products">';
+							<?php the_widget( 'WP_Widget_Recent_Posts' ); ?>
 
-								storefront_promoted_products();
+							<?php if ( lwr_categorized_blog() ) : // Only show the widget if site has multiple categories. ?>
 
-							echo '</section>';
+								<div class="widget widget_categories">
 
-							echo '<nav class="col-2" aria-label="Product Categories">';
+									<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'lwr' ); ?></h2>
 
-							echo '<h2>' . esc_html__( 'Product Categories', 'storefront' ) . '</h2>';
+									<ul>
+										<?php
+										wp_list_categories( array(
+											'orderby'    => 'count',
+											'order'      => 'DESC',
+											'show_count' => 1,
+											'title_li'   => '',
+											'number'     => 10,
+										) );
+										?>
+									</ul>
 
-							the_widget( 'WC_Widget_Product_Categories', array(
-																			'count'		=> 1,
-							) );
-							echo '</nav>';
+								</div><!-- .widget -->
 
-							echo '</div>';
+							<?php endif; ?>
 
-							echo '<section aria-label="Popular Products" >';
+							<?php
+							/* translators: %1$s: smiley */
+							$archive_content = '<p>' . sprintf( __( 'Try looking in the monthly archives. %1$s',
+							'lwr' ), convert_smilies( ':)' ) ) . '</p>';
+							the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$archive_content" );
+							?>
 
-							echo '<h2>' . esc_html__( 'Popular Products', 'storefront' ) . '</h2>';
+							<?php the_widget( 'WP_Widget_Tag_Cloud' ); ?>
 
-							echo storefront_do_shortcode( 'best_selling_products', array(
-								'per_page'  => 4,
-								'columns'   => 4,
-							) );
+						</div><!-- .page-content -->
 
-							echo '</section>';
-					}
-					?>
+					</section><!-- .error-404 -->
 
-				</div><!-- .page-content -->
-			</div><!-- .error-404 -->
+				</main><!-- #main -->
 
-		</main><!-- #main -->
-	</div><!-- #primary -->
+			</div><!-- #primary -->
 
-<?php get_footer();
+		</div> <!-- .row -->
+
+	</div><!-- Container end -->
+
+</div><!-- Wrapper end -->
+
+<?php get_footer(); ?>
