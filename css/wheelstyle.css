@@ -1,0 +1,454 @@
+@font-face {
+	font-family: "Lato"; font-style: normal; font-weight: normal;
+	src: url("lato-reg-webfont.eot?#iefix") format("embedded-opentype"), url("lato-reg-webfont.woff") format("woff"), url("lato-reg-webfont.ttf") format("truetype"), url("lato-reg-webfont.svg#latoregular") format("svg"); } 
+
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, a, img, ol, ul, li, article, aside, footer, header, menu, nav, section { margin: 0; padding: 0; border: 0; font: inherit; font-family: Arial,serif; font-size: 100%; vertical-align: baseline; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+body { background-color: #fff; line-height: 1; }
+
+h1 { color: #0daea1; font-size: 2.2em; font-weight: 700; height: 30px; letter-spacing: 1.5px; margin: 48px 0 0; text-align: center; }
+div#wheel { 
+	-webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none;
+	-moz-user-select: none; -ms-user-select: none; user-select: none;
+	-moz-border-radius: 0 0 54%; -webkit-border-radius: 0 0 54%; -kthml-border-radius: 0 0 54%;
+	border-radius: 0 0 54%; height: 775px; margin: 36px auto 0; overflow: hidden; position: relative; width: 775px; }
+
+div#grey { 
+	-moz-transform: rotate(81deg); -ms-transform: rotate(81deg); 
+	-o-transform: rotate(81deg); -webkit-transform: rotate(81deg); 
+	background-color: #585858; border-radius: 100%; cursor: pointer; font-size: .9em; font-weight: 700; height: 575px; left: 100px; position: absolute; top: 50px; transform: rotate(81deg); transition: transform .36s; width: 575px; }
+div#grey:hover { background-color: #515151; }
+div#grey > div.line { background-color: #fff; height: 2px; position: absolute; width: 50%; } 
+div#grey > div.line:nth-of-type(1) { top: 50%; left: 50%; }
+div#grey > div.line:nth-of-type(2) { 
+	-moz-transform: rotate(72deg); -ms-transform: rotate(72deg); 
+	-o-transform: rotate(72deg); -webkit-transform: rotate(72deg); 
+	 top: 74%; transform: rotate(72deg); left: 33%; }
+div#grey > div.line:nth-of-type(3) { 
+	-moz-transform: rotate(144deg); -ms-transform: rotate(144deg); 
+	-o-transform: rotate(144deg); -webkit-transform: rotate(144deg); 
+	top: 65%; transform: rotate(144deg); left: 4.5%; }
+div#grey > div.line:nth-of-type(4) { 
+	-moz-transform: rotate(216deg); -ms-transform: rotate(216deg); 
+	-o-transform: rotate(216deg); -webkit-transform: rotate(216deg); 
+	top: 35%; transform: rotate(216deg); left: 4.5%; }
+div#grey > div.line:nth-of-type(5) { 
+	-moz-transform: rotate(288deg); -ms-transform: rotate(288deg); 
+	-o-transform: rotate(288deg); -webkit-transform: rotate(288deg); 
+	top: 26%; transform: rotate(288deg); left: 33%; }
+div#grey > div { border-radius: 4px; color: #fff; line-height: .9em; position: absolute; text-align: center;}
+div#grey > div > div { display: inline-block; position: relative; }
+div#grey > div#quality { 
+	-moz-transform: rotate(-17deg); -ms-transform: rotate(-17deg); 
+	-o-transform: rotate(-17deg); -webkit-transform: rotate(-17deg); 
+	left: 25%; top: 4.5%; transform: rotate(-17deg); }
+div#grey > div#quality > div.left-outer { 
+	-moz-transform: rotate(-10deg); -ms-transform: rotate(-10deg); 
+	-o-transform: rotate(-10deg); -webkit-transform: rotate(-10deg); 
+	top: 5px; transform: rotate(-10deg); }
+div#grey > div#quality > div.left-inner { 
+	-moz-transform: rotate(-5deg); -ms-transform: rotate(-5deg); 
+	-o-transform: rotate(-5deg); -webkit-transform: rotate(-5deg); 
+	top: 1px; transform: rotate(-5deg); }
+div#grey > div#quality > div.right-inner { 
+	-moz-transform: rotate(4deg); -ms-transform: rotate(4deg); 
+	-o-transform: rotate(4deg); -webkit-transform: rotate(4deg); 
+	transform: rotate(4deg); top: 1px;}
+div#grey > div#quality > div.right-outer { 
+	-moz-transform: rotate(12deg); -ms-transform: rotate(12deg); 
+	-o-transform: rotate(12deg); -webkit-transform: rotate(12deg); 
+	left: 1px; top: 4px; transform: rotate(12deg); }
+
+div#grey > div#wellbeing { 
+	-moz-transform: rotate(59deg); -ms-transform: rotate(59deg); 
+	-o-transform: rotate(59deg); -webkit-transform: rotate(59deg); 
+	left: 78.5%; top: 24%; transform: rotate(59deg); width: 130px; }
+div#grey > div#wellbeing > div.left { 
+	-moz-transform: rotate(-8deg); -ms-transform: rotate(-8deg); 
+	-o-transform: rotate(-8deg); -webkit-transform: rotate(-8deg); 
+	top: 2px; transform: rotate(-8deg); }
+div#grey > div#wellbeing > div.right { 
+	-moz-transform: rotate(6deg); -ms-transform: rotate(6deg); 
+	-o-transform: rotate(6deg); -webkit-transform: rotate(6deg); 
+	left: 0px; top: 1.5px; transform: rotate(6deg); }
+
+div#grey > div#livelihoods { 
+	-moz-transform: rotate(127deg); -ms-transform: rotate(127deg); 
+	-o-transform: rotate(127deg); -webkit-transform: rotate(127deg); 
+	left: 78.75%; top: 75.5%; transform: rotate(127deg); }
+div#grey > div#livelihoods > div.left-inner { 
+	-moz-transform: rotate(-8deg); -ms-transform: rotate(-8deg); 
+	-o-transform: rotate(-8deg); -webkit-transform: rotate(-8deg); 
+	top: 2px; transform: rotate(-8deg); }
+div#grey > div#livelihoods > div.right-inner { 
+	-moz-transform: rotate(6deg); -ms-transform: rotate(6deg); 
+	-o-transform: rotate(6deg); -webkit-transform: rotate(6deg); 
+	top: 2px; transform: rotate(6deg); }
+
+div#grey > div#growth { 
+	-moz-transform: rotate(199deg); -ms-transform: rotate(199deg); 
+	-o-transform: rotate(199deg); -webkit-transform: rotate(199deg); 
+	left: 22%; top: 93%; transform: rotate(199deg); }
+div#grey > div#growth > div.left-outer { 
+	-moz-transform: rotate(-12deg); -ms-transform: rotate(-12deg); 
+	-o-transform: rotate(-12deg); -webkit-transform: rotate(-12deg); 
+	top: 6px; transform: rotate(-12deg); }
+div#grey > div#growth > div.left-inner { 
+	-moz-transform: rotate(-6deg); -ms-transform: rotate(-6deg); 
+	-o-transform: rotate(-6deg); -webkit-transform: rotate(-6deg); 
+	top: 1.5px; transform: rotate(-6deg); }
+div#grey > div#growth > div.right-inner { 
+	-moz-transform: rotate(5deg); -ms-transform: rotate(5deg); 
+	-o-transform: rotate(5deg); -webkit-transform: rotate(5deg); 
+	top: 1.5px; transform: rotate(5deg); }
+div#grey > div#growth > div.right-outer { 
+	-moz-transform: rotate(13deg); -ms-transform: rotate(13deg); 
+	-o-transform: rotate(13deg); -webkit-transform: rotate(13deg); 
+	left: -1px; top: 6px; transform: rotate(13deg); }
+
+div#grey > div#foodsecurity { 
+	-moz-transform: rotate(270deg); -ms-transform: rotate(270deg); 
+	-o-transform: rotate(270deg); -webkit-transform: rotate(270deg); 
+	left: -6.75%; top: 47.25%; transform: rotate(270deg); }
+div#grey > div#foodsecurity > div.left-outer { 
+	-moz-transform: rotate(-13deg); -ms-transform: rotate(-13deg); 
+	-o-transform: rotate(-13deg); -webkit-transform: rotate(-13deg); 
+	left: -3px;top: 4px; transform: rotate(-13deg); }
+div#grey > div#foodsecurity > div.left-inner { 
+	-moz-transform: rotate(-5deg); -ms-transform: rotate(-5deg); 
+	-o-transform: rotate(-5deg); -webkit-transform: rotate(-5deg); 
+  left: -3px; top: 1px; transform: rotate(-5deg); }
+div#grey > div#foodsecurity > div.right-inner { 
+	-moz-transform: rotate(8deg); -ms-transform: rotate(8deg); 
+	-o-transform: rotate(8deg); -webkit-transform: rotate(8deg); 
+	top: 2px; transform: rotate(8deg); }
+div#grey > div#foodsecurity > div.right-outer { 
+	-moz-transform: rotate(12deg); -ms-transform: rotate(12deg); 
+	-o-transform: rotate(12deg); -webkit-transform: rotate(12deg); 
+	left: 0px; top: 6px; transform: rotate(12deg); }
+
+div#green { 
+	-moz-transform: rotate(31deg); -ms-transform: rotate(31deg); 
+	-o-transform: rotate(31deg); -webkit-transform: rotate(31deg); 
+	background-color: #a6ce39; border-radius: 100%; box-shadow: 0 0 5px 1px #222; cursor: pointer; font-size: .9em; font-weight: 700; height: 500px; left: 137.5px; position: absolute; transform: rotate(31deg); transition: transform .35s; top: 85px; width: 500px; }
+div#green:hover { background-color: #97c03d; }
+div#green > div.line { background-color: #fff; height: 2px; position: absolute; width: 50%; } 
+div#green > div.line:nth-of-type(1) { top: 50%; left: 50%; }
+div#green > div.line:nth-of-type(2) { 
+	-moz-transform: rotate(120deg); -ms-transform: rotate(120deg); 
+	-o-transform: rotate(120deg); -webkit-transform: rotate(120deg); 
+	top: 71.5%; transform: rotate(120deg); left: 12.5%; }
+div#green > div.line:nth-of-type(3) { 
+	-moz-transform: rotate(240deg); -ms-transform: rotate(240deg); 
+	-o-transform: rotate(240deg); -webkit-transform: rotate(240deg); 
+	top: 28.5%; transform: rotate(240deg); left: 12.5%; }
+div#green > div { color: #fff; line-height: .9em; position: absolute; text-align: center; }
+div#green > div > div { display: inline-block; position: relative; }
+div#green > div#absorptive { 
+	-moz-transform: rotate(33deg); -ms-transform: rotate(33deg); 
+	-o-transform: rotate(33deg); -webkit-transform: rotate(33deg); 
+	left: 66%; top: 8.5%; transform: rotate(33deg); }
+div#green > div#absorptive > div.left-inner { 
+	-moz-transform: rotate(-9deg); -ms-transform: rotate(-9deg); 
+	-o-transform: rotate(-9deg); -webkit-transform: rotate(-9deg); 
+	top: 2px; transform: rotate(-9deg); }
+div#green > div#absorptive > div.right-inner { 
+	-moz-transform: rotate(8deg); -ms-transform: rotate(8deg); 
+	-o-transform: rotate(8deg); -webkit-transform: rotate(8deg); 
+	top: 2px; transform: rotate(8deg); }
+
+div#green > div#adaptive { 
+	-moz-transform: rotate(153deg); -ms-transform: rotate(153deg); 
+	-o-transform: rotate(153deg); -webkit-transform: rotate(153deg); 
+	left: 63.35%; top: 89%; transform: rotate(153deg); }
+div#green > div#adaptive > div.left-inner { 
+	-moz-transform: rotate(-6deg); -ms-transform: rotate(-6deg); 
+	-o-transform: rotate(-6deg); -webkit-transform: rotate(-6deg); 
+	left: 0; top: 1.5px; transform: rotate(-6deg); }
+div#green > div#adaptive > div.right-inner { 
+	-moz-transform: rotate(8deg); -ms-transform: rotate(8deg); 
+	-o-transform: rotate(8deg); -webkit-transform: rotate(8deg); 
+	left: .5px; top: 2px; transform: rotate(8deg); }
+
+div#green > div#transformative { 
+	-moz-transform: rotate(271deg); -ms-transform: rotate(271deg); 
+	-o-transform: rotate(271deg); -webkit-transform: rotate(271deg); 
+	left: -9.5%; line-height: 1em; top: 46%; transform: rotate(271deg); }
+div#green > div#transformative > div.left-inner { 
+	-moz-transform: rotate(-11deg); -ms-transform: rotate(-11deg); 
+	-o-transform: rotate(-11deg); -webkit-transform: rotate(-11deg); 
+	top: 4px; transform: rotate(-11deg); }
+div#green > div#transformative > div.right-inner { 
+	-moz-transform: rotate(11deg); -ms-transform: rotate(11deg); 
+	-o-transform: rotate(11deg); -webkit-transform: rotate(11deg); 
+	left: 0px; top: 4px; transform: rotate(11deg); }
+
+div#blue { 
+	-moz-transform: rotate(41deg); -ms-transform: rotate(41deg); 
+	-o-transform: rotate(41deg); -webkit-transform: rotate(41deg); 
+	background-color: #0daea1; border-radius: 100%; box-shadow: 0 0 5px 1px #222; cursor: pointer; font-size: .76em; font-weight: 700;height: 425px; left: 175px; position: absolute; top: 123px; transform: rotate(41deg); transition: transform .35s; width: 425px; }
+div#blue:hover { background-color: #14a196; }
+div#blue > div.line { background-color: #fff; height: 1px; position: absolute; width: 50%; }
+div#blue > div.line:nth-of-type(1) { left: 0; top: 50%; }
+div#blue > div.line:nth-of-type(2) { 
+	-moz-transform: rotate(45deg); -ms-transform: rotate(45deg); 
+	-o-transform: rotate(45deg); -webkit-transform: rotate(45deg); 
+	left: 7.5%; top: 32.5%; transform: rotate(45deg); }
+div#blue > div.line:nth-of-type(3) { 
+	-moz-transform: rotate(90deg); -ms-transform: rotate(90deg); 
+	-o-transform: rotate(90deg); -webkit-transform: rotate(90deg); 
+	left: 25%; top: 25%; transform: rotate(90deg); }
+div#blue > div.line:nth-of-type(4) { 
+	-moz-transform: rotate(135deg); -ms-transform: rotate(135deg); 
+	-o-transform: rotate(135deg); -webkit-transform: rotate(135deg); 
+	left: 7.5%; top: 67.5%; transform: rotate(135deg); }
+div#blue > div.line:nth-of-type(5) { 
+	-moz-transform: rotate(180deg); -ms-transform: rotate(180deg); 
+	-o-transform: rotate(180deg); -webkit-transform: rotate(180deg); 
+	left: 50%; top: 50%; transform: rotate(180deg); }
+div#blue > div.line:nth-of-type(6) { 
+	-moz-transform: rotate(225deg); -ms-transform: rotate(225deg); 
+	-o-transform: rotate(225deg); -webkit-transform: rotate(225deg); 
+	left: 42.5%; top: 67.5%; transform: rotate(225deg); }
+div#blue > div.line:nth-of-type(7) { 
+	-moz-transform: rotate(270deg); -ms-transform: rotate(270deg); 
+	-o-transform: rotate(270deg); -webkit-transform: rotate(270deg); 
+	left: 25%; top: 75%; transform: rotate(270deg); }
+div#blue > div.line:nth-of-type(8) { 
+	-moz-transform: rotate(315deg); -ms-transform: rotate(315deg); 
+	-o-transform: rotate(315deg); -webkit-transform: rotate(315deg); 
+	left: 42.5%; top: 32.5%; transform: rotate(315deg); }
+
+div#blue > div { color: #fff; } 
+div#blue > div#selforganization { 
+	-moz-transform: rotate(-23deg); -ms-transform: rotate(-23deg); 
+	-o-transform: rotate(-23deg); -webkit-transform: rotate(-23deg); 
+	left: 22.5%; position: absolute; text-align: center; top: 5.25%; transform: rotate(-23deg); }
+div#blue > div#learning { 
+	-moz-transform: rotate(21deg); -ms-transform: rotate(21deg); 
+	-o-transform: rotate(21deg); -webkit-transform: rotate(21deg); 
+	left: 60.5%; position: absolute; text-align: center; top: 7.5%; transform: rotate(21deg); }
+div#blue > div#redundancy { 
+	-moz-transform: rotate(67deg); -ms-transform: rotate(67deg); 
+	-o-transform: rotate(67deg); -webkit-transform: rotate(67deg); 
+	left: 81.25%; position: absolute; text-align: center; top: 32.5%; transform: rotate(66deg); }
+div#blue > div#rapidity { 
+	-moz-transform: rotate(112deg); -ms-transform: rotate(112deg); 
+	-o-transform: rotate(112deg); -webkit-transform: rotate(112deg); 
+	left: 84.25%; position: absolute; text-align: center; top: 67%; transform: rotate(112deg); }
+div#blue > div#scale { 
+	-moz-transform: rotate(158deg); -ms-transform: rotate(158deg); 
+	-o-transform: rotate(158deg); -webkit-transform: rotate(158deg); 
+	left: 61.5%; position: absolute; text-align: center; top: 90.5%; transform: rotate(158deg); }
+div#blue > div#flexibility { 
+	-moz-transform: rotate(-159deg); -ms-transform: rotate(-159deg); 
+	-o-transform: rotate(-159deg); -webkit-transform: rotate(-159deg); 
+	left: 22.5%; position: absolute; text-align: center; top: 88%; transform: rotate(-159deg); }
+div#blue > div#equality { 
+	-moz-transform: rotate(-112deg); -ms-transform: rotate(-112deg); 
+	-o-transform: rotate(-112deg); -webkit-transform: rotate(-112deg); left: 1%; position: absolute; text-align: center; top: 64.75%; transform: rotate(-112deg); }
+div#blue > div#robustness { 
+	-moz-transform: rotate(-67deg); -ms-transform: rotate(-67deg); 
+	-o-transform: rotate(-67deg); -webkit-transform: rotate(-67deg); 
+	left: -1%; position: absolute; text-align: center; top: 31%; transform: rotate(-67deg); }
+
+div#orange { 
+	-moz-transform: rotate(8deg); -ms-transform: rotate(8deg); 
+	-o-transform: rotate(8deg); -webkit-transform: rotate(8deg); 
+	background-color: #eb9323; border-radius: 100%; box-shadow: 0 0 5px 1px #222; cursor: pointer; font-size: .78em; font-weight: 700; height: 335px; left: 222.5px; position: absolute; transform: rotate(8deg); top: 170px; transition: transform .35s; width: 335px; }
+div#orange:hover { background-color: #dd8426; }
+div#orange > div.line { background-color: #fff; height: 1px; position: absolute; width: 50%; }
+div#orange > div.line:nth-of-type(1) { left: 50%; top: 50%; }
+div#orange > div.line:nth-of-type(2) { 
+	-moz-transform: rotate(72deg); -ms-transform: rotate(72deg); 
+	-o-transform: rotate(72deg); -webkit-transform: rotate(72deg); 
+	left: 33%; top: 73.5%; transform: rotate(72deg); }
+div#orange > div.line:nth-of-type(3) { 
+	-moz-transform: rotate(144deg); -ms-transform: rotate(144deg); 
+	-o-transform: rotate(144deg); -webkit-transform: rotate(144deg); 
+	left: 5.5%; top: 64.5%; transform: rotate(144deg); }
+div#orange > div.line:nth-of-type(4) { 
+	-moz-transform: rotate(216deg); -ms-transform: rotate(216deg); 
+	-o-transform: rotate(216deg); -webkit-transform: rotate(216deg); 
+	left: 5%; top: 35.25%; transform: rotate(216deg); }
+div#orange > div.line:nth-of-type(5) { 
+	-moz-transform: rotate(288deg); -ms-transform: rotate(288deg); 
+	-o-transform: rotate(288deg); -webkit-transform: rotate(288deg); 
+	left: 33%; top: 26%; transform: rotate(288deg); }
+div#orange > div > div { display: inline-block; }
+
+div#orange > div { color: #fff; position: absolute; text-align: center; }
+div#orange > div#physical { 
+	-moz-transform: rotate(-17deg); -ms-transform: rotate(-17deg); 
+	-o-transform: rotate(-17deg); -webkit-transform: rotate(-17deg); 
+	left: 30%; top: 7%; transform: rotate(-17deg); }
+div#orange > div#natural { 
+	-moz-transform: rotate(-90deg); -ms-transform: rotate(-90deg); 
+	-o-transform: rotate(-90deg); -webkit-transform: rotate(-90deg); 
+	left: -.5%; top: 45%; transform: rotate(-90deg); }
+div#orange > div#economic { 
+	-moz-transform: rotate(-161deg); -ms-transform: rotate(-161deg); 
+	-o-transform: rotate(-161deg); -webkit-transform: rotate(-161deg); 
+	left: 26%; top: 83%; transform: rotate(-161deg); }
+div#orange > div#social { 
+	-moz-transform: rotate(54deg); -ms-transform: rotate(54deg); 
+	-o-transform: rotate(54deg); -webkit-transform: rotate(54deg); 
+	left: 76%; top: 24%; transform: rotate(54deg); }
+div#orange > div#human { 
+	-moz-transform: rotate(128deg); -ms-transform: rotate(128deg); 
+	-o-transform: rotate(128deg); -webkit-transform: rotate(128deg); 
+	left: 73%; top: 70%; transform: rotate(128deg); }
+
+div#inner { 
+	-moz-transform: rotate(66deg); -ms-transform: rotate(66deg); 
+	-o-transform: rotate(66deg); -webkit-transform: rotate(66deg); 
+	border-radius: 76px; cursor: pointer; height: 200px; left: 287.5px; position: absolute; top: 237.5px; transform: rotate(66deg); transition: transform .25s; width: 200px; }
+div#inner > div { background-color: #777; border: 4px solid #444; border-radius: 100%; color: #fff; font-size: .8em; height: 84px; position: absolute; width: 84px; }
+div#inner > div > img { padding: 10% 0 0 20%; width: 75%; }
+div#inner > div#household { 
+	-moz-transform: rotate(-72deg); -ms-transform: rotate(-72deg); 
+	-o-transform: rotate(-72deg); -webkit-transform: rotate(-72deg); 
+	left: 0%; top: 20%; transform: rotate(-72deg); }
+div#inner > div#society { left: 28%; top: -1%; }
+div#inner > div#infrastructure { 
+	-moz-transform: rotate(72deg); -ms-transform: rotate(72deg); 
+	-o-transform: rotate(72deg); -webkit-transform: rotate(72deg); 
+	left: 54%; top: 20%; transform: rotate(72deg); }
+div#inner > div#infrastructure > img { padding-left: 24%; }
+div#inner > div#levels { 
+	-moz-transform: rotate(216deg); -ms-transform: rotate(216deg);
+	-o-transform: rotate(216deg); -webkit-transform: rotate(216deg); 
+	left: 10%; top: 52%; transform: rotate(216deg); }
+div#inner > div#levels > img { padding: 15% 0 0 29%; }
+div#inner > div#individual { 
+	-moz-transform: rotate(-216deg); -ms-transform: rotate(-216deg);
+	-o-transform: rotate(-216deg); -webkit-transform: rotate(-216deg); 
+	left: 45%; top: 51%; transform: rotate(-216deg); }
+	
+div#message { background-color: #f3f3e0; border: 1px solid #333; border-radius: 8px; box-shadow: 2px 2px 8px 1px #aaa; font-size: .9em; left: 20%; line-height: 1.2em;padding: 12px 16px; position: absolute; top: 180px; width: 150px; }
+
+div#screen { -moz-border-radius: 100%; -khtml-border-radius: 100%; -webkit-border-radius: 100%; -webkit-transform: translateZ(0);
+    -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);border-radius: 100%; height: 775px; left: 0; overflow: hidden; position: absolute; top: -67.25px; width: 775px; }
+div#screen > div { -webkit-transform: translateZ(0);
+    -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%); border-top: 255px solid transparent; border-bottom: 305px solid #084267; border-left: 185px solid transparent; border-right: 205px solid #084267; height: 0; left: 50%; position: absolute; top: -140px; width: 0; }
+div#screen > div > h2 { 
+	-moz-transform: rotate(66deg); -ms-transform: rotate(66deg); 
+	-o-transform: rotate(66deg); -webkit-transform: rotate(66deg); 
+	color: #fff; font-size: .9em; font-weight: 700; left: 37px; position: relative; top: 174px; transform: rotate(66deg); width: 300px; }
+div#screen > div > h2 > div { display: inline-block; position: relative; }
+div#screen > div > h2 > div.left-outer { 
+	-moz-transform: rotate(-11deg); -ms-transform: rotate(-11deg); 
+	-o-transform: rotate(-11deg); -webkit-transform: rotate(-11deg); 
+	left: -4px; top: 7px; transform: rotate(-11deg); }
+div#screen > div > h2 > div.left-inner { 
+	-moz-transform: rotate(-6deg); -ms-transform: rotate(-6deg); 
+	-o-transform: rotate(-6deg); -webkit-transform: rotate(-6deg); 
+	left: -4px; top: 2px; transform: rotate(-6deg); }
+div#screen > div > h2 > div.right-inner { 
+	-moz-transform: rotate(5deg); -ms-transform: rotate(5deg); 
+	-o-transform: rotate(5deg); -webkit-transform: rotate(5deg); 
+	top: 1.25px; transform: rotate(5deg); }
+div#screen > div > h2 > div.right-outer { 
+	-moz-transform: rotate(11deg); -ms-transform: rotate(11deg); 
+	-o-transform: rotate(11deg); -webkit-transform: rotate(11deg); 
+	top: 5.75px; transform: rotate(11deg); }
+
+div#screen-side-right { background-color: #084267; height: 14px; left: 50%; position: absolute; top: 342px; width: 387.5px; }
+div#screen-side-left { 
+	-moz-transform: rotate(-55deg); -ms-transform: rotate(-55deg); 
+	-o-transform: rotate(-55deg); -webkit-transform: rotate(-55deg); 
+	background-color: #084267; height: 14px; left: 314px; position: absolute; top: 151px; transform: rotate(-55deg); width: 378px; }
+
+div.stressor { background-color: #fff; color: #084267; cursor: pointer; font-size: .65em; font-weight: 700; height: 26px; padding: 2px 0; position: absolute; width: 68px; line-height:1em; }
+div.stressor > div { color: #fff; font-size: 4.6em; left: -34px; position: absolute; top: 6px; }
+div.stressor > span { position: relative; }
+div.stressor#market { 
+	-moz-transform: rotate(-46deg); -ms-transform: rotate(-46deg); 
+	-o-transform: rotate(-46deg); -webkit-transform: rotate(-46deg); 
+	left: 578px; top: 72px; transform: rotate(-46deg); }
+div.stressor#climate { 
+	-moz-transform: rotate(-37deg); -ms-transform: rotate(-37deg); 
+	-o-transform: rotate(-37deg); -webkit-transform: rotate(-37deg); 
+	left: 621px; top: 122px; transform: rotate(-37deg); }
+div.stressor#insecurity { 
+	-moz-transform: rotate(-27deg); -ms-transform: rotate(-27deg); 
+	-o-transform: rotate(-27deg); -webkit-transform: rotate(-27deg); 
+	left: 655px; top: 175px; transform: rotate(-27deg); }
+div.stressor#disasters { 
+	-moz-transform: rotate(-15deg); -ms-transform: rotate(-15deg); 
+	-o-transform: rotate(-15deg); -webkit-transform: rotate(-15deg); 
+	left: 677px; top: 233px; transform: rotate(-15deg); }
+div.stressor#conflict { 
+	-moz-transform: rotate(-3deg); -ms-transform: rotate(-3deg); 
+	-o-transform: rotate(-3deg); -webkit-transform: rotate(-3deg); 
+	left: 687px; line-height: 22px; top: 296px; transform: rotate(-3deg); }
+div.stressor#conflict > div { top: 0; }
+div.stressor:hover { background-color: #f6cac6; }
+div.stressor:hover > div { color: #f6cac6; }
+div.stressor.activated { background-color: #ee654e; color: #a3022f; }
+div.stressor.activated > div { color: #ee654e; }
+div.stressor.activated:hover { background-color: #f8593e; }
+div.stressor.activated:hover > div { color: #f8593e; }
+
+div#resilience-circle { background-color: #084267; border-radius: 100%; height: 65px; left: 355px; position: absolute; top: 305px; width: 65px; }
+div#resilience-circle > span { color: #eee; display: inline-block; font-size: .6em; font-weight: 700; left: 0; position: absolute; top: 0; }
+div#resilience-circle > span.rc-r { 
+	-moz-transform: rotate(-32deg); -ms-transform: rotate(-32deg); 
+	-o-transform: rotate(-32deg); -webkit-transform: rotate(-32deg); 
+	left: 17px; top: 11px; transform: rotate(-32deg); }
+div#resilience-circle > span.rc-e1 { 
+	-moz-transform: rotate(-21deg); -ms-transform: rotate(-21deg); 
+	-o-transform: rotate(-21deg); -webkit-transform: rotate(-21deg); 
+	left: 25px; top: 8px; transform: rotate(-21deg); }
+div#resilience-circle > span.rc-s { 
+	-moz-transform: rotate(-3deg); -ms-transform: rotate(-3deg); 
+	-o-transform: rotate(-3deg); -webkit-transform: rotate(-3deg); 
+	left: 33px; top: 7px; transform: rotate(-3deg); }
+div#resilience-circle > span.rc-i1 { 
+	-moz-transform: rotate(35deg); -ms-transform: rotate(35deg); 
+	-o-transform: rotate(35deg); -webkit-transform: rotate(35eg); 
+	left: 41px; top: 9px; transform: rotate(35deg); }
+div#resilience-circle > span.rc-l { 
+	-moz-transform: rotate(52deg); -ms-transform: rotate(52deg); 
+	-o-transform: rotate(52deg); -webkit-transform: rotate(52deg); 
+	left: 45px; top: 13px; transform: rotate(52deg); }
+div#resilience-circle > span.rc-i2 { 
+	-moz-transform: rotate(63deg); -ms-transform: rotate(63deg); 
+	-o-transform: rotate(63deg); -webkit-transform: rotate(63deg); 
+	left: 50px; top: 19px; transform: rotate(63deg); }
+div#resilience-circle > span.rc-e2 { 
+	-moz-transform: rotate(80deg); -ms-transform: rotate(80deg); 
+	-o-transform: rotate(80deg); -webkit-transform: rotate(80deg); 
+	left: 49px; top: 26px; transform: rotate(80deg); }
+div#resilience-circle > span.rc-n { 
+	-moz-transform: rotate(108deg); -ms-transform: rotate(108deg); 
+	-o-transform: rotate(108deg); -webkit-transform: rotate(108deg); 
+	left: 48px; top: 34px; transform: rotate(108deg); }
+div#resilience-circle > span.rc-c { 
+	-moz-transform: rotate(131deg); -ms-transform: rotate(131deg); 
+	-o-transform: rotate(131deg); -webkit-transform: rotate(131deg); 
+	left: 43px; top: 42px; transform: rotate(131deg); }
+div#resilience-circle > span.rc-e3 { 
+	-moz-transform: rotate(163deg); -ms-transform: rotate(163deg); 
+	-o-transform: rotate(163deg); -webkit-transform: rotate(163deg); 
+	left: 37px; top: 46px; transform: rotate(163deg); }
+div#resilience-circle > div { background-color: #ec008c; border-radius: 100%; height: 15px; left: 25px; position: relative; top: 25px; width: 15px; } 
+
+div#info { clear: both; margin: -130px auto 54px; overflow: auto; width: 75%; } 
+div#info > div { float: right; width: 40%; }
+div#info > div > a#logo > img { background-color: #aaa; clear: both; display: block; float: right; margin: 45px 3% 22px 0; width: 220px; }
+div#info > div > div#cc { clear: both; float: right; font-size: .55em; margin-right: 5%; width: 210px; }
+
+div#info > div#legend, div#info > div#systems { border: 2px solid #666; border-radius: 4px; color: #666; float: left; font-size: .75em; line-height: 15px; padding: 8px 16px 15px; width: 217px; }
+div#legend > h2 { font-weight: 700; margin: 4px 0 5px; font-size:1em; }
+div#legend > div > div { border: 3px solid transparent; border-radius: 100%; display: inline-block; height: 12px; margin: 6px 6px 0 7%; vertical-align: bottom; width: 12px; }
+div#legend > div > div.outcomes { background-color: #585858; }
+div#legend > div > div.capacities { background-color: #a6ce39; }
+div#legend > div > div.attributes { background-color: #0daea1; }
+div#legend > div > div.capitals { background-color: #eb9323; }
+div#legend > div > div.system { background-color: #777; border: 3px solid #444; }
+
+div#info > div#systems { border-color: #444; color: #444; float: left; font-size: .65em; margin: 59px 0 0 11px; padding: 6px 11px 8px; position: relative; width: 140px }
+div#systems p { margin-bottom: 0; }
+div#systems > p > img { display: inline-block; height: auto; margin-right: 6px; margin-top: 2px; vertical-align: bottom; width: 16px; }
+div#systems:before { border-top: 2px dashed #444; border-right: 2px dashed #444; content: ""; display: block; height: 17px; left: -89px; position: absolute; top: -17px; width: 124px; }
