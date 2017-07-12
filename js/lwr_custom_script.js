@@ -4,11 +4,11 @@
         var scrHt = $(window).scrollTop();
 
         // Persistent Scrolling Navigation
-        if (scrHt > 116) {
-            $("nav#site-navigation").addClass("scrolled");
+        if (scrHt > 137) {
+            $("nav#main-nav").addClass("scrolled");
         }
         else {
-            $("nav#site-navigation").removeClass("scrolled");
+            $("nav#main-nav").removeClass("scrolled");
         }
 
         // Set any object to animate with class "animated-object" and "shift"
