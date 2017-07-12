@@ -4404,7 +4404,7 @@ tbody.collapse.show {
     flex-flow: row wrap; }
     .card-deck .card {
       display: flex;
-      flex: 1 0 0;
+      flex: 1 0 0%;
       flex-direction: column; }
       .card-deck .card:not(:first-child) {
         margin-left: 15px; }
@@ -4415,7 +4415,7 @@ tbody.collapse.show {
     display: flex;
     flex-flow: row wrap; }
     .card-group .card {
-      flex: 1 0 0; }
+      flex: 1 0 0%; }
       .card-group .card + .card {
         margin-left: 0;
         border-left: 0; }
@@ -10309,6 +10309,9 @@ h1.navbar-brand a:hover {
 .gallery-caption {
   display: block; }
 
+.page-header {
+  width: 100%; }
+
 input, optgroup, select, textarea {
   font-family: gesta, "Century Gothic", Arial, helvetica sans-serif; }
   input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="search"], input[type="number"], optgroup[type="text"], optgroup[type="email"], optgroup[type="url"], optgroup[type="password"], optgroup[type="search"], optgroup[type="number"], select[type="text"], select[type="email"], select[type="url"], select[type="password"], select[type="search"], select[type="number"], textarea[type="text"], textarea[type="email"], textarea[type="url"], textarea[type="password"], textarea[type="search"], textarea[type="number"] {
@@ -10521,6 +10524,11 @@ table {
 /* Primary Navigation */
 #main-nav {
   padding: 0; }
+  #main-nav.scrolled {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999; }
   @media (min-width: 992px) {
     #main-nav #main-menu {
       width: 100%; }
@@ -10581,7 +10589,30 @@ table {
       #main-nav #main-menu #menu-item-403 {
         background: url("../img/ER_85.png") top left no-repeat;
         min-height: 85px;
-        padding-left: 85px; } }
+        padding-left: 85px; }
+      #main-nav #main-menu #menu-item-508 {
+        background: url("../img/mission-quilt-135x135.jpg") top left no-repeat;
+        min-height: 135px;
+        padding-left: 135px; }
+      #main-nav #main-menu #menu-item-7859 {
+        background: url("../img/schoolkit.png") top left no-repeat;
+        min-height: 135px;
+        padding-left: 118px; }
+      #main-nav #main-menu #menu-item-517 {
+        background: url("../img/LWR-Farmers-Market-Coffee.jpg") top left no-repeat;
+        min-height: 135px;
+        padding-left: 104px; }
+      #main-nav #main-menu #menu-item-335 a {
+        background: url("../img/where-needed-most.jpg") top left no-repeat;
+        min-height: 200px;
+        width: 250px;
+        font-size: 1.3em;
+        text-align: center;
+        color: #ffffff; }
+      #main-nav #main-menu #menu-item-6723 {
+        background: url("../img/lwrgifts.jpg") top left no-repeat;
+        min-height: 135px;
+        padding-left: 135px; } }
 
 /** EMERGENCY PANEL **/
 #current-emergency {
@@ -10782,7 +10813,9 @@ table {
   background-color: #000;
   display: block;
   height: 75vh;
-  margin-bottom: 3em;
+  margin: 0 -15px 3em;
+  position: relative;
+  overflow: hidden;
   /** If Video is Playing (w/ JS) **/ }
   #homepage-top-banner a.vidplaying .banner {
     bottom: 100%; }
@@ -10801,7 +10834,8 @@ table {
     display: inline-block;
     line-height: 1.1em;
     padding-left: 4%;
-    width: 40%; }
+    width: 40%;
+    color: #ffffff; }
   .banner .vidlink {
     color: #fff;
     display: inline-block;
@@ -10911,10 +10945,14 @@ table {
       display: inline-flex;
       flex-direction: column; }
       .author-info .media img {
-        margin: 70px auto 6px; }
+        margin: 70px auto 6px;
+        border-radius: 50%; }
         .author-info .media img.fia {
           margin: 1.3333em auto 0;
           max-width: 100%; } }
+.avatar {
+  border-radius: 50%; }
+
 .entry-content p, .entry-content li {
   font-size: 1.2em;
   line-height: 1.55555555em;
@@ -11063,6 +11101,8 @@ table {
 /*
  * WooCommerce Styles
  */
+.woocommerce.archive .page-title {
+  width: 100%; }
 .woocommerce .background-image #hero_image {
   min-height: 80vh; }
 .woocommerce .wc-tabs-wrapper, .woocommerce .related.products {
@@ -11158,7 +11198,8 @@ table {
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
-  list-style: none; }
+  list-style: none;
+  width: 100%; }
   @media (min-width: 576px) {
     .woocommerce ul.products {
       margin-right: -15px;
@@ -11282,7 +11323,8 @@ table {
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
-  margin-left: -15px; }
+  margin-left: -15px;
+  margin-top: 3em; }
   @media (min-width: 576px) {
     .single-product .product {
       margin-right: -15px;
@@ -11299,6 +11341,11 @@ table {
     .single-product .product {
       margin-right: -15px;
       margin-left: -15px; } }
+.single-product .background-image .product:not(li) {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100%;
+  margin-top: 0; }
 .single-product .woocommerce-product-gallery {
   position: relative;
   width: 100%;
@@ -11725,6 +11772,20 @@ ul.order_details {
 @media (min-width: 768px) {
   .handheld-footer-bar {
     display: none; } }
+.responsive-embed {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  height: auto; }
+  .responsive-embed iframe, .responsive-embed object, .responsive-embed embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+
 /*
 * Use existing Bootstrap 4 classes and
 * variables to extend - override CF7 style
