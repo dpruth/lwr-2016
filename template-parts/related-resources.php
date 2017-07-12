@@ -102,7 +102,7 @@
 			if ( $query->have_posts() ) : 			
 				while ( $query->have_posts() ) :
 					$query->the_post(); ?>
-					<a href="<?php the_permalink(); ?>" class="col-sm-3">
+					<a href="<?php the_permalink(); ?>" class="col-sm-4 col-md-3">
 						<?php if (has_post_thumbnail() ) {
 										the_post_thumbnail('thumbnail');
 									}
