@@ -54,22 +54,23 @@ function lwr_posted_on() {
 		
 	} else {		
 		$_staff_member_meta = get_the_author_meta( 'ID' );
+		$_staff_member_name = get_the_author();
 	$byline = sprintf(
 		esc_html_x( '%s', 'post author', 'lwr' ),
-		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
+		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( $_staff_member_name ) . '</a></span>'
 	);
 	}
 	
 	echo '<aside class="media">';
 	if( is_singular() && !is_front_page() ) {
-		echo get_avatar( $_staff_member_meta, 96, 'mm', '', array( 'class'=>'rounded-circle') );
+		echo get_avatar( $_staff_member_meta, 96, 'mm', $_staff_member_name, array( 'class'=>'rounded-circle') );
 	} else {
-		echo get_avatar( $_staff_member_meta, 36, 'mm', '', array( 'class'=>'rounded-circle mr-3') );
+		echo get_avatar( $_staff_member_meta, 36, 'mm', $_staff_member_name, array( 'class'=>'rounded-circle mr-3') );
 	}
 	echo '<div class="media-body">';
 	echo '<span class="byline"> ' . $byline . '</span><br /><span class="posted-on">' . $posted_on . '</span>'; // WPCS: XSS OK.
 	
-	if( in_category(183) ) {
+	if( is_single() && in_category(183) ) {
 		?>
 		<div class="faith-in-action text-center">
 			<a href="<?php echo get_category_link( 183 ); ?>"><span class="faith-in">Faith in</span> <span class="action">Action</span></a>
@@ -155,6 +156,24 @@ function lwr_category_transient_flusher() {
 }
 add_action( 'edit_category', 'lwr_category_transient_flusher' );
 add_action( 'save_post',     'lwr_category_transient_flusher' );
+
+
+/*
+ *	Scrolling
+*/
+	function lwr_scrollTop() {
+			if ( is_admin_bar_showing() ) { ?>
+				<style> nav#main-nav.scrolled { top: 32px; } 
+					@media screen and (max-width: 782px) {
+						nav#main-nav.scrolled { top: 46px; }
+					}
+					@media screen and (max-width: 600px) {
+						nav#main-nav.scrolled { top: 0; }
+					}
+				</style>
+			<?php }
+	}
+	add_action ( 'wp_footer', 'lwr_scrollTop' );
 
 
 /*
@@ -323,12 +342,12 @@ endif;
 
 	
 /*
- *	Add Faith in Action logo to posts
+ *	Add Faith in Action or Special Reports logo to posts
  */
 	function faith_in_action_logo($content) {
 		if ( is_single() && is_main_query() ) {
 			
-			if (in_category(183) ) {
+			if (in_category(183) ) { // Faith in Action
 				ob_start();	?>
 				<div class="row justify-content-center">
 					<div class="col text-center faith-in-action">
@@ -338,7 +357,7 @@ endif;
 			<?php
 			$fia_logo = ob_get_clean();
 			$content = $content . $fia_logo;
-			} elseif ( in_category(181) ) {
+			} elseif ( in_category(181) ) { // Special Reports
 				ob_start(); ?>
 				<div class="row justify-content-center">
 					<div class="col text-center special-reports">

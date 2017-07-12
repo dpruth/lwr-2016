@@ -10,8 +10,8 @@
 	/* Open Div */
 	add_shortcode('full-width', 'be_div_shortcode');
 	function be_div_shortcode($atts, $content = null ) {
-		$return = '</div></div><div class="container-fluid">' . $content . '</div><div class="container"><div class="entry-content">';
-		return $return;
+		return '</div></div><div class="container-fluid">' . do_shortcode($content) . '</div><div class="container"><div class="entry-content">';
+		
 	}
 
 
@@ -21,7 +21,7 @@
 	
 	function add_project_map_to_page() {
 				ob_start();
-				get_template_part( 'inc/custom', 'project-locations' );
+				get_template_part( 'template-parts/projects', 'location' );
 				$ret = ob_get_contents();
 				ob_end_clean();
 				return $ret;

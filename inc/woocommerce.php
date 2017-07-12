@@ -241,7 +241,7 @@ function custom_add_to_cart_text() {
 			$order_status = $order->get_status();
 			$line_items = $order->get_items();
 					
-			if ( $order_status == 'completed' || $order_status == 'processing' ) {
+			// if ( $order_status == 'completed' || $order_status == 'processing' ) {
 					?>
 				<div class="share">	
 					<h2><i class="fa fa-heart"></i> Share the love</h2>
@@ -262,7 +262,7 @@ function custom_add_to_cart_text() {
 				</div>
 
 					<?php
-			}
+			// }
 	}
 	add_action( 'woocommerce_thankyou', 'lwr_custom_thank_you_share', 1);
 
