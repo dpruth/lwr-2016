@@ -18,11 +18,11 @@
 	<div class="entry-content container">
 
 		<div class="row">
-			<div class="col-4">
+			<div class="col-sm-4">
 				<?php the_post_thumbnail('large'); ?>
 			</div>
 		
-			<div class="col-8">
+			<div class="col-sm-8">
 				<h3><?php echo staff_member_title(); ?></h3>
 				
 				<?php 

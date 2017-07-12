@@ -12,7 +12,7 @@
 	<header class="entry-header jumbotron">
 
 		<?php the_title( '<h1 class="entry-title" itemprop="name">', '</h1>' ); ?>
-		<div class="d-flex justify-content-center" itemprop="video">
+		<div class="d-flex justify-content-center responsive-embed" itemprop="video">
 			<?php 
 			$iframe = get_field('video_url');
 			preg_match('/src="(.+?)"/', $iframe, $matches);

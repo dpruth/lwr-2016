@@ -159,9 +159,9 @@
  *	Section latest blog posts
  */
 	function lwr_latest_posts_section() { ?>
-		<section id="stay-informed" class="py-5 container">
+		<section id="stay-informed" class="py-5 container justify-content-center">
 			<h2 class="display-5 text-center" >Get the Latest from LWR&rsquo;s Blog</h2>
-	
+				<div class="card-deck mt-3">
 			<?php
 			$count = (int)0;
 			$args = array( 
@@ -172,34 +172,25 @@
 			$blog_query = new WP_Query( $args );
 				
 			while ( $blog_query->have_posts() ) :
-				$blog_query->the_post(); 
-				
-			if( $count > 2 ) { $count = 0; }
-			if( $count == 0 ) {	echo '<div class="card-deck justify-content-center mt-3">';	}
+				$blog_query->the_post(); 			
 			?> 
 		<article class="card" id="post-<?php the_ID(); ?>">
-
-			<a href="<?php the_permalink();?>" rel="bookmark">
-				<?php the_post_thumbnail( 'large', array( 'class' => 'card-img-top' ) ); ?>
-			</a>
-		<div class="card-block">
-			<a href="<?php the_permalink();?>" rel="bookmark">
-			<h3 class="card-title"><?php the_title(); ?></h3>
-			<p class="card-text"><?php echo wp_strip_all_tags( get_the_excerpt(), true); ?></p>
-			</a>
-		</div>
+			<a href="<?php the_permalink();?>" rel="bookmark"><?php the_post_thumbnail( 'large', array( 'class' => 'card-img-top img-fluid' ) ); ?></a>
+			<div class="card-block">
+				<a href="<?php the_permalink();?>" rel="bookmark">
+				<h3 class="card-title"><?php the_title(); ?></h3>
+				<p class="card-text"><?php echo wp_strip_all_tags( get_the_excerpt(), true); ?></p>
+				</a>
+			</div>
 			<footer class="entry-meta card-footer">
 				<?php lwr_posted_on(); ?>
 			</footer><!-- .entry-meta -->
-
-	</article><!-- #post-## -->
+		</article><!-- #post-## -->
 					<?php
-					if( $count == 2 ) {	echo '</div>';	}
-					$count++;
 				endwhile;
 								 
 				wp_reset_postdata(); ?>
-
+			</div>
 		<p class="text-center text-uppercase mt-3"><a href="<?php echo get_permalink( get_option('page_for_posts' ) ); ?>">Read More &raquo;</a></p>
 		</section>
 	<?php }
@@ -210,8 +201,7 @@
 	function lwr_impact_section() { ?>
 	<section id="impact" class="row justify-content-center blue">
 		<div class="jumbotron blue">
-			<h3 class="display-5 text-center">Lutheran World Relief employs the highest standards <br />
-			of financial stewardship and accountability</h3>
+			<h3 class="display-5 text-center">Lutheran World Relief employs the highest standards	of financial stewardship and accountability</h3>
 
 			<?php lwr_charity_badges(); ?>
 		
@@ -234,8 +224,9 @@
 			while ( $query->have_posts() ) :
 				$query->the_post(); ?>
 			<div class="card"> <!-- Project Promise -->
-				
-				<?php the_post_thumbnail('full', array( 'class' => 'card-img-top' ) ); ?>
+				<div class="img-fluid">
+					<?php the_post_thumbnail('full', array( 'class' => 'card-img-top' ) ); ?>
+				</div>
 				<div class="card-block">
 					<h3 class="card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 					<p class="card-text"><?php echo wp_strip_all_tags( get_the_excerpt() ); ?></p>
@@ -245,15 +236,18 @@
 		<?php
 			endwhile;
 			wp_reset_postdata();		
-			
-			$query = new WP_Query( array( 'post_type' => 'page', 'post__in' => array(65, 444) ) );
+			// LWR Farmers Market Post ID = 24811
+			// Mission Quilts Post ID = 65
+			$query = new WP_Query( array( 'post_type' => 'page', 'post__in' => array(65, 24811) ) );
 			if ( $query->have_posts() ) : ?>
 			<div class="card-deck justify-content-center mt-3">
 			<?php
 			while ( $query->have_posts() ) :
 				$query->the_post(); ?>
 			<div class="card">
-				<?php the_post_thumbnail('large', array( 'class' => 'card-img-top' ) ); ?>
+				<div class="img-fluid">
+					<?php the_post_thumbnail('large', array( 'class' => 'card-img-top' ) ); ?>
+				</div>
 				<div class="card-block">
 					<h3 class="card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 					<p class="card-text"><?php echo wp_strip_all_tags( get_the_excerpt() ); ?></p>
