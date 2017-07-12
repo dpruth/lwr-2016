@@ -13,20 +13,11 @@
 
 get_header();
 
-$container   = get_theme_mod( 'lwr_container_type' );
-$sidebar_pos = get_theme_mod( 'lwr_sidebar_position' );
 ?>
-
-<?php if ( is_front_page() && is_home() ) : ?>
-	<?php get_template_part( 'global-templates/hero', 'none' ); ?>
-<?php endif; ?>
 
 <div class="wrapper" id="wrapper-index">
 
-	<div class="<?php echo esc_html( $container ); ?>" id="content" tabindex="-1">
-
-			<!-- Do the left sidebar check and opens the primary div -->
-			<?php get_template_part( 'global-templates/left-sidebar-check', 'none' ); ?>
+	<div class="container" id="content" tabindex="-1">
 
 			<main class="site-main row" id="main">
 
@@ -61,14 +52,6 @@ $sidebar_pos = get_theme_mod( 'lwr_sidebar_position' );
 			<!-- The pagination component -->
 			<?php lwr_pagination(); ?>
 
-		</div><!-- #primary -->
-
-		<!-- Do the right sidebar check -->
-		<?php if ( 'right' === $sidebar_pos || 'both' === $sidebar_pos ) : ?>
-
-			<?php get_sidebar( 'right' ); ?>
-
-		<?php endif; ?>
 
 </div><!-- Container end -->
 
