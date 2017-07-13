@@ -125,4 +125,4 @@ $container = get_theme_mod( 'lwr_container_type' );
 		</nav><!-- .site-navigation -->
 
 	</div><!-- .wrapper-navbar end -->
-			<?php do_action('lwr_emergency_banner');
+			<?php lwr_emergency_banner();
