@@ -356,8 +356,8 @@ table {
 #current-emergency { 
 	background-color: #9a1b26; 
 	clear: both; 
-	height: 50px; 
-	overflow: auto; 
+	height: 4.5em; 
+	overflow: visible ; 
 	position: relative; 
 	width: 100%; 
 	z-index: 998; 
@@ -368,10 +368,10 @@ table {
 	}
 	&>* { float: left; }
   h2 { 
-		color: #fff; 
+		color:$white; 
 		font-size: 1.4em; 
-		line-height: 50px; 
-		margin: 0 12px 0 0; 
+		line-height: 3em; 
+		margin: 0 15px; 
 		clear: none; 
 		}
 	span { 
@@ -384,17 +384,15 @@ table {
 		letter-spacing: -2px; 
 	}
 	p { 
-		color: #fff; 
-		margin: 15px 12px 0 0; 
+		color: $white; 
+		margin: 0 12px; 
+		line-height: 4.4em;
 	}
-	form { 
-		float: right; 
-		height: 42px; 
-		margin: 8px 12px 0 0; 
-		width: 33%; 
-		
-		input { margin-left: 4%; }
-		input[type="text"] { width: 40px; }
+	div {
+		float: right;
+	}
+	@media (max-width: 768px) {
+		display: none;
 	}
 }
 
@@ -1126,6 +1124,14 @@ article.post {
 		}
 	}
 	
+	.woocommerce-error {
+		li {
+			display: inline-block;
+			list-style: none;
+			margin-right: 15px;
+		}
+	}
+	
 }
 
 .woocommerce-products-header, .woocommerce-account .entry-header, .woocommerce-cart .entry-header, .woocommerce-checkout .entry-header {
@@ -1180,6 +1186,13 @@ article.post {
 			@include make-col(12);
 		}
 		position: relative;
+		
+		.woocommerce-product-gallery__image:not(:first-of-type) {
+			float: left;
+			margin-right: 15px;
+			width: 50px;
+			height: 50px;
+		}
 		
 		.woocommerce-product-gallery__trigger {
 			position: absolute;
