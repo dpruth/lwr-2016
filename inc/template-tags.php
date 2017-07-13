@@ -158,6 +158,25 @@ add_action( 'edit_category', 'lwr_category_transient_flusher' );
 add_action( 'save_post',     'lwr_category_transient_flusher' );
 
 
+
+/*
+ *	Test for Advanced Custom Fields Options Page
+ */
+	if( function_exists('acf_add_options_page') ) {
+	
+		acf_add_options_page(array(
+			'page_title' 	=> 'Site Alert Settings',
+			'menu_title'	=> 'Alert Settings',
+			'menu_slug' 	=> 'alert-settings',
+			'capability'	=> 'edit_others_posts',
+			'redirect'		=> false,
+			'icon_url' 		=> 'dashicons-megaphone'
+		));
+	
+	}
+
+
+
 /*
  *	Scrolling
 */
@@ -179,27 +198,38 @@ add_action( 'save_post',     'lwr_category_transient_flusher' );
 /*
  * RED EMERGENCY BANNER 
  */
-if ( ! function_exists( 'lwr_add_emergency_banner' ) ) :
-function lwr_add_emergency_banner() { 
+function lwr_emergency_banner() { 
 		
-		if (get_option('is_current_emergency') == 'on') { ?>
+		if ( get_field('red_bar_alert', 'option') ) { 
+			$donate_item = get_field('red_alert_product', 'option');
+		?>
 			<div id="current-emergency">
 
-				<h2><?php echo esc_attr(get_option('emergency_name')); ?></h2>
-				<p><?php echo esc_attr(get_option('emergency_excerpt')); ?></p>
-
-				<form>
-					<input type="radio" name="amount" value="10" checked /> $10
-					<input type="radio" name="amount" value="20" /> $20
-					<input type="text" name="amount" value="" /> Another Amount
-					<input type="submit" value="Donate Now!" />
+				<h2><?php the_field('red_alert_headline', 'option'); ?></h2>
+				<p><?php the_field('red_alert_description', 'option'); ?></p>
+				<div class="d-flex flex-row">
+				<form method="get" class="form">
+					<input type="hidden" name="add-to-cart" value="<?php echo $donate_item->ID; ?>" />
+					<input type="hidden" name="nyp" value="100" />
+					<button class="btn btn-outline-secondary btn-lg" type="submit">$100</button>
 				</form>
+				<form method="get" class="form">
+					<input type="hidden" name="add-to-cart" value="<?php echo $donate_item->ID; ?>" />
+					<input type="hidden" name="nyp" value="500" />
+					<button class="btn btn-outline-secondary btn-lg" type="submit">$500</button>
+				</form>
+				<form method="get" class="form-inline">
+					<div class="input-group">
+						<div class="input-group-addon">$</div>
+						<input type="text" name="nyp" data-cip-id="nyp" class="form-control" placeholder="Other Amount">
+					</div>
+					<input type="hidden" name="add-to-cart" value="<?php echo $donate_item->ID; ?>">
+					<button type="submit" class="btn btn-outline-secondary btn-lg">Donate Now</button>
+				</form>
+				</div>
 			</div>
 		<?php } 
 }
-add_action( 'lwr_emergency_banner', 'lwr_add_emergency_banner' );
-endif;
-
 
 /*
  *	MAILCHIMP EMAIL FORM
@@ -262,34 +292,70 @@ endif;
  *	DIALOG FOR EMAIL CAPTURE
  */
 	function enqueue_modal_window() {
-		if (get_option('modal_toggle') == 'on' && is_front_page() ) :
-			// Sets cookie so modal only displays once
-			wp_enqueue_script('jquery-cookie', '', array('jquery'), false, true ); 
+		if ( get_field('show_modal_window', 'option' ) ) :
+			$pages = get_field('what_pages', 'option');
+			if( !empty($pages) ) {
+				foreach ($pages as $page) {
+					$page_id = $page->ID;
+				}
+				$page_ids = explode(',', $page_id);
+			}
+			// If no page selected show on all pages, otherwise show on selected
+			if( empty($pages) || is_page($page_ids) ) {
 			
-			// Include modal javascript after jQuery
-			wp_enqueue_script('lwr_dialog', get_stylesheet_directory_uri() . '/js/lwr_jquery_dialog.js', array('jquery','jquery-cookie'), false, true );
+				// Sets cookie so modal only displays once
+				wp_enqueue_script('jquery-cookie', '', array('jquery'), false, true ); 
+			
+				// Include modal javascript after jQuery
+				wp_enqueue_script('lwr_dialog', get_stylesheet_directory_uri() . '/js/lwr_jquery_dialog.js', array('jquery','jquery-cookie'), false, true );
 	
-			// Include 'add_jquery_dialog' function in footer
-			add_action('wp_footer', 'add_jquery_dialog');
-			
+				// Include 'add_modal_dialog' function in footer
+				add_action('wp_footer', 'add_modal_dialog');
+			}
 		endif;
 	}
-//	add_action( 'wp_enqueue_scripts', 'enqueue_modal_window' );
+	add_action( 'wp_enqueue_scripts', 'enqueue_modal_window' );
 	
-	function add_jquery_dialog() {
+	function add_modal_dialog() {
+		
+		if ( get_field('modal_type', 'option') == 'email' ) {
+			$heading = get_field('modal_email_heading', 'option');
+			$text = get_field('modal_email_text', 'option');
+			$image = get_field('modal_email_background', 'option');
+			ob_start();
+				lwr_mailchimp_form('enews', 'dialog');
+			$footer_content = ob_get_clean();
+		} else {
+			$heading = get_field('modal_donation_heading', 'option');
+			$text = get_field('modal_donation_text', 'option');
+			$image = get_field('modal_donation_background', 'option');
+			$donation_item = get_field('modal_donation_product', 'option');
+			ob_start(); ?>
+				<form method="get" class="form-inline">
+					<div class="input-group">
+						<div class="input-group-addon">$</div>
+						<input type="text" name="nyp" data-cip-id="nyp" class="form-control" placeholder="Amount">
+					</div>
+					<input type="hidden" name="add-to-cart" value="<?php echo $donation_item->ID; ?>">
+					<button type="submit" class="btn btn-primary">Donate Now</button>
+				</form>
+			<?php
+			$footer_content = ob_get_clean();
+
+		}
 		?>
 		<div id="dialog" class="modal fade">
 			<div class="modal-dialog modal-lg" >
-				<div class="modal-content" 	style="background: #fff url('<?php echo esc_url(get_option('modal_background') ); ?>') no-repeat;" >
+				<div class="modal-content" 	style="background: #fff url('<?php echo esc_url($image); ?>') no-repeat;" >
 					<div class="modal-body">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times-circle"></i></button>
 						<div id="dialog-text" >
-							<h2><?php echo esc_attr( get_option('modal_title') ); ?></h2>
-							<p><?php echo get_option('modal_text'); ?></p>
+							<h2><?php echo esc_attr( $heading ); ?></h2>
+							<?php echo $text; ?>
 						</div>
 					</div>
 					<div class="modal-footer justify-content-center">
-						<?php lwr_mailchimp_form('enews', 'dialog'); ?>
+						<?php echo $footer_content; ?>
 					</div>
 				</div>
 			</div>
