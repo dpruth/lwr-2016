@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying archive Press Releases.
+ * The template for displaying archive Staff Members.
  *
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
@@ -11,33 +11,38 @@
 get_header();
 
 // DEFINE ACTION FOR DISPLAYING STAFF
-	add_action('lwr_staff_loop', 'add_lwr_staff_loop' );
-	function add_lwr_staff_loop() { ?>
-					<li class="product" itemprop="employee" itemscope itemtype="http://schema.org/Person"><a href="<?php the_permalink(); ?>" itemprop="url" >
+	function lwr_staff_loop() { ?>
+				<div class="col-sm-6 col-md-4 col-lg-3">
+					<div class="card" itemprop="employee" itemscope itemtype="http://schema.org/Person">
+					<a href="<?php the_permalink(); ?>" itemprop="url" >
 						<?php if (has_post_thumbnail() ) { 
-											the_post_thumbnail( 'thumbnail' ); 
+											echo get_the_post_thumbnail( 'thumbnail', array('class'=>'card-img-top') ); 
 										}
 										else { 
-											echo '<img src="' . get_stylesheet_directory_uri() . '/img/blankstaff.png" />';
-											} ?>
-					<h3 itemprop="name"><?php the_title(); ?></h3>
-					<span itemprop="jobTitle"><?php echo staff_member_title(); ?></span></a>
-					</li>
+											echo '<img src="' . get_stylesheet_directory_uri() . '/img/blankstaff.png" class="card-img-top" />';
+											} ?></a>
+						<div class="card-block">
+							<h3 class="card-title" itemprop="name"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+							<span itemprop="jobTitle"><?php echo staff_member_title(); ?></span></a>
+						</div>
+					</div>
+				</div>
 		<?php
 	}
  ?>
 
-	<div id="primary" class="content-area single-product">
-		<main id="main" class="site-main" role="main">
+<div class="wrapper" id="archive-wrapper">
 
-			<article id="post-<?php the_ID(); ?>" class="hentry" itemscope itemtype="http://schema.org/NGO">
-				<?php
-					add_action( 'storefront_page_before', 'lwr_add_breadcrumb', 3 );
-					do_action( 'storefront_page_before' );
-				?>
-				<header class="entry-header">
-					<h1>Staff and Board</h1>
-				</header>
+	<div class="container" id="content" tabindex="-1">
+
+			<!-- Do the left sidebar check -->
+			<?php get_template_part( 'global-templates/left-sidebar-check', 'none' ); ?>
+
+			<main class="site-main" id="main">
+
+					<header class="page-header">
+						<h1>Staff &amp; Board</h1>
+					</header><!-- .page-header -->
 				<?php
 
 						
@@ -50,16 +55,17 @@ get_header();
 
 				while ( $query1->have_posts() ) :
 					$query1->the_post(); ?>
-				<div class="product" itemprop="employee" itemscope itemtype="http://schema.org/Person">
-					<div class="images" itemprop="image">
+				<div class="row" itemprop="employee" itemscope itemtype="http://schema.org/Person">
+					<div class="col-3" itemprop="image">
 					<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'full' ); ?></a>
 					</div>
-					<div class="summary entry-summary">
+					<div class="col-8 summary entry-summary">
 					<h2 class="product_title entry-title"><a href="<?php the_permalink(); ?>" ><span itemprop="name"><?php the_title(); ?></span></a></h2>
 					<h3 itemprop="jobTitle" ><?php echo staff_member_title(); ?></h3>
-					<?php the_excerpt(); ?> <a href="<?php the_permalink(); ?>" rel="nofollow">Continue reading&raquo;</a>
+					<?php the_excerpt(); ?>
 					</div>
 				</div>
+				<hr />
 				<?php endwhile;
 				
 				wp_reset_postdata();
@@ -81,19 +87,22 @@ get_header();
 				$query = new WP_Query( $args );			
 				if ( $query->have_posts() ) :
 			?>
-		<div class="related" >
-				<h2 itemprop="department" itemscope itemtype="http://schema.org/Organization" itemprop="name">Board of Directors</h2>
-				<ul class="products">
+			<div class="clearfix"></div>
+			
+				<h2 class="mt-4" itemprop="department" itemscope itemtype="http://schema.org/Organization" itemprop="name">Board of Directors</h2>
+				<div class="row">
 			<?php 
 
 				while ( $query->have_posts() ) :
 					$query->the_post();
-					do_action('lwr_staff_loop');
+					lwr_staff_loop();
 					
-					endwhile; endif;
-				wp_reset_postdata(); ?>
-				</ul>
-			<?php
+					endwhile; ?>
+				</div>
+					<?php
+			endif;
+				wp_reset_postdata(); 
+				
 
 	// LOOP THROUGH DEPARTMENTS
 	$departments = get_terms( array(
@@ -126,16 +135,22 @@ get_header();
 				$query = new WP_Query( $args );
 				
 				if ( $query->have_posts() ) : ?>
-				<h2 itemprop="department" itemscope itemtype="http://schema.org/Organization" itemprop="name"><?php echo $department_name; ?></h2>
-				<ul class="products"><?php
+				<div class="clearfix"></div>
+				<h2 class="mt-4" itemprop="department" itemscope itemtype="http://schema.org/Organization" itemprop="name"><?php echo $department_name; ?></h2>
+				<div class="row">
+				<?php
 
 				while ( $query->have_posts() ) :
 					$query->the_post(); 
 				
-				do_action('lwr_staff_loop');
-				
+						lwr_staff_loop();				
+						
 				endwhile; 
-				?></ul><?php
+				?>
+				</div>
+				<div class="clearfix"></div>
+
+				<?php
 				endif;
 				wp_reset_postdata(); 
 				
@@ -165,16 +180,20 @@ get_header();
 					$query = new WP_Query( $args );
 				
 						if ( $query->have_posts() ) : ?>
-						<h3 itemprop="department" itemscope itemtype="http://schema.org/Organization" itemprop="name"><?php echo $child_name; ?></h3>
-						<ul class="products"><?php
+						<h3 class="mt-4" itemprop="department" itemscope itemtype="http://schema.org/Organization" itemprop="name"><?php echo $child_name; ?></h3>
+						<div class="row clearfix">
+						<?php
 
 						while ( $query->have_posts() ) :
 							$query->the_post(); 
 				
-						do_action('lwr_staff_loop');
+						lwr_staff_loop();
 				
-						endwhile; 
-						?></ul><?php
+						endwhile; ?>
+						</div>
+						<div class="clearfix"></div>
+
+						<?php
 						endif;
 						wp_reset_postdata(); 
 						
@@ -182,12 +201,10 @@ get_header();
 				} // End parent loop
 			} // End departments loop
 	?>
-			</div>
+		</div>
 
-		</article><!-- /article -->
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-<?php do_action( 'storefront_sidebar' ); ?>
 <?php get_footer(); ?>

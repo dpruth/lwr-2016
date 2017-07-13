@@ -1,43 +1,40 @@
 <?php
 /**
- * The template for displaying country pages.
+ * The template for displaying all pages.
  *
- * Template Name: Country Page
+ * This is the template that displays all pages by default.
+ * Please note that this is the WordPress construct of pages
+ * and that other 'pages' on your WordPress site will use a
+ * different template.
  *
- * @package storefront
+ * @package lwr
  */
 
-get_header(); ?>
+get_header();
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+$container   = get_theme_mod( 'lwr_container_type' );
+$sidebar_pos = get_theme_mod( 'lwr_sidebar_position' );
 
-			<?php while ( have_posts() ) : the_post(); 
-				
-				
-					do_action( 'storefront_page_before' );
-				
-					add_action( 'storefront_page', 'lwr_add_breadcrumb', 3 );
-					add_action( 'storefront_page', 'lwr_add_page_header_image', 15 );
-					remove_action( 'storefront_page', 'storefront_page_header', 10);
-				
+?>
 
-					get_template_part( 'content', 'page' ); 
-					get_template_part( 'inc/custom', 'videos' );				
-					get_template_part( 'inc/custom', 'project-locations' );
-					get_template_part( 'inc/custom', 'current-projects' );
-					get_template_part( 'inc/custom', 'resources' );
-					get_template_part( 'inc/custom', 'contact-info' );
-				
-				
-				/**
-				 * @hooked storefront_display_comments - 10
-				 */
-				do_action( 'storefront_page_after' );
-				
-			endwhile; // end of the loop. ?>
+<main class="site-main" id="main">
+	<div class="row">
+				<?php while ( have_posts() ) : the_post(); ?>
 
-		</main><!-- #main -->
-	</div><!-- #primary -->
+					<?php	get_template_part( 'loop-templates/content', 'page' ); ?>
+
+
+				<?php endwhile; // end of the loop. ?>
+	</div>
+</main><!-- #main -->
+
+					<?php
+						get_template_part( 'template-parts/custom', 'videos' );
+						get_template_part( 'template-parts/projects', 'location' );
+						get_template_part( 'template-parts/projects', 'current' );
+						get_template_part( 'template-parts/related', 'resources' );
+						get_template_part( 'template-parts/contact', 'info' );
+					?>
+
 
 <?php get_footer(); ?>

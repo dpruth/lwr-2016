@@ -1,45 +1,69 @@
 <?php
 /**
- * Template Name: DMEL Diagram Page
+ * The template for displaying all pages.
  *
- * @package storefront
+ * This is the template that displays all pages by default.
+ * Please note that this is the WordPress construct of pages
+ * and that other 'pages' on your WordPress site will use a
+ * different template.
+ *
+ * @package lwr
  */
-get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main dmel" role="main">
-      <?php do_action( 'storefront_single_post_before' ); ?>
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope="" itemtype="http://schema.org/BlogPosting">
-			  <?php
-				/**
-				* @hooked storefront_post_header - 10
-				* @hooked storefront_post_meta - 20
-				* @hooked storefront_post_content - 30
-				*/
+get_header();
 
-				remove_action( 'storefront_single_post', 'storefront_post_header', 10 );
-				remove_action( 'storefront_single_post', 'storefront_post_meta', 20 );
-				remove_action( 'storefront_single_post', 'storefront_post_content', 30 );
+$container   = get_theme_mod( 'lwr_container_type' );
+$sidebar_pos = get_theme_mod( 'lwr_sidebar_position' );
 
-				add_action( 'storefront_single_post', 'lwr_add_breadcrumb', 3 );
-				//add_action( 'storefront_single_post', 'lwr_add_page_header_image', 15 );
-				add_action( 'storefront_single_post', 'storefront_page_content', 28 );
+?>
 
-				do_action( 'storefront_single_post' );
+<div class="wrapper" id="page-wrapper">
 
-        include('inc/dmel-header.php');
-        include('inc/dmel-diagram.php');
-        include('inc/dmel-phase-1.php');
-        include('inc/dmel-phase-2.php');
-        include('inc/dmel-phase-3.php');
-        include('inc/dmel-phase-4.php');
-        ?>
-      </article><!-- #post-## -->
-      <?php do_action( 'storefront_single_post_after' ); ?>
-		</main><!-- #main -->
-	</div><!-- #primary -->
+	<div class="container-fluid" id="content" tabindex="-1">
 
-<?php do_action( 'storefront_sidebar' ); ?>
+		<div class="row">
+
+			<!-- Do the left sidebar check -->
+			<?php get_template_part( 'global-templates/left-sidebar-check', 'none' ); ?>
+
+			<main class="site-main dmel" id="main">
+
+				<?php while ( have_posts() ) : the_post(); ?>
+
+					<?php
+						wp_enqueue_script( 'cool_find_script', get_stylesheet_directory_uri() . '/js/find6.js' );
+						wp_enqueue_script( 'dmel-scripts', get_stylesheet_directory_uri() . '/js/dmel-scripts.js' );
+
+		        get_template_part('page-templates/dmel', 'header');
+						get_template_part('page-templates/dmel', 'diagram');
+						get_template_part('page-templates/dmel', 'phase-1');
+						get_template_part('page-templates/dmel', 'phase-2');
+						get_template_part('page-templates/dmel', 'phase-3');
+						get_template_part('page-templates/dmel', 'phase-4');
+					
+					// If comments are open or we have at least one comment, load up the comment template.
+					if ( comments_open() || get_comments_number() ) :
+						comments_template();
+					endif;
+					?>
+
+				<?php endwhile; // end of the loop. ?>
+
+			</main><!-- #main -->
+
+		</div><!-- #primary -->
+
+		<!-- Do the right sidebar check -->
+		<?php if ( 'right' === $sidebar_pos || 'both' === $sidebar_pos ) : ?>
+
+			<?php get_sidebar( 'right' ); ?>
+
+		<?php endif; ?>
+
+	</div><!-- .row -->
+
+</div><!-- Container end -->
+
+</div><!-- Wrapper end -->
+
 <?php get_footer(); ?>
-<script type="text/javascript" id="cool_find_script" src="<?php bloginfo('stylesheet_directory'); ?>/js/find6.js"></script>
-<script type="text/javascript" src="<?php bloginfo('stylesheet_directory'); ?>/js/dmel-scripts.js"></script>

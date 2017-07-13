@@ -1,0 +1,47 @@
+// Use this file to overwrite the basic Bootstrap variables and add your own variables
+// To overwrite a Bootstrap variable you don´t have to touch the Bootstrap folder. 
+// Just copy a variable from /sass/bootstrap/_variables.scss, paste it here and edit the value.
+// As example you find one of the most important Bootstrap variable below: $brand-primary.
+// Thats the ugly Bootstrap blue used for all the links, primary buttons etc.
+// Just add your color code here, compile the theme.scss file to change this color everywhere
+
+$font-family-sans-serif: gesta, 'Century Gothic', Arial, helvetica sans-serif;
+$brand-primary: #00ada1;
+$brand-success: #74c3e4;
+$brand-inverse: #274162;
+$brand-green: #a6ce39;
+$brand-teal: #00ada1;
+$brand-blue: #74c3e4;
+$lwr-orange: #d45a31;
+$white: #ffffff;
+$dark-brown: #524743;
+$transparent-banner-green: rgba(53,92,65,.75);
+$light-gray: #999;
+$dark-gray: #333;
+$lwr-purple: #5f3866;
+
+$navbar-inverse-color: #fff;
+$navbar-inverse-hover-color: #fff;
+
+$jumbotron-bg: #fff;
+$facebook-blue: #3b5998;
+$twitter-blue: #00aced;
+
+$headings-color: $brand-inverse;
+
+$btn-primary-color:              $white;
+$btn-primary-bg:                 $brand-inverse;
+$btn-primary-border:             $btn-primary-bg;
+
+$btn-secondary-color: $white;
+$btn-secondary-bg: $white;
+$btn-secondary-border: $white;
+
+$state-success-text:            $brand-teal;
+$state-success-bg:              rgba(0,173,161,.2);
+$state-success-border:          rgba(0,173,161,.4);
+
+$state-info-text:                $brand-inverse;
+$state-info-bg:                  $brand-blue;
+
+$state-warning-text:             $dark-brown;

@@ -4,11 +4,11 @@
         var scrHt = $(window).scrollTop();
 
         // Persistent Scrolling Navigation
-        if (scrHt > 116) {
-            $("nav#site-navigation").addClass("scrolled");
+        if (scrHt > 137) {
+            $("nav#main-nav").addClass("scrolled");
         }
         else {
-            $("nav#site-navigation").removeClass("scrolled");
+            $("nav#main-nav").removeClass("scrolled");
         }
 
         // Set any object to animate with class "animated-object" and "shift"
@@ -38,7 +38,7 @@
 			function vidRescaleBack(){
 				
 				var w = $(window).width();
-				var	h = $("a#homepage-top-banner").height();
+				var	h = $("#homepage-top-banner").height();
 
 				yt-player.setSize( w, h );
 				yt-player.unMute();
@@ -47,67 +47,10 @@
 				yt-player.playVideo();
 			}
 				
-			$("a#homepage-top-banner").attr("href", "javascript:void(0);").attr("target", "_self").on("click", function () {
+			$("#homepage-top-banner a").attr("href", "javascript:void(0);").attr("target", "_self").on("click", function () {
             $(this).addClass("vidplaying").children("div");
 						vidRescaleBack();
         });
-
-
-    // Mobile navigation menu
-
-    var siteNavigation = document.getElementById("site-navigation");
-    var menuResponsiveMenu = document.getElementById("menu-responsive-menu");
-    var page = document.getElementById("page");
-    var footer = document.getElementById("storefront-handheld-footer-bar");
-    var root = document.documentElement;
-    var mobileToggle = false;
-
-    function showMobileNav() {
-        $("#menu-responsive-menu").addClass('menu-responsive-visible');
-        $("#page").addClass('page-shift');
-        $("html").addClass("no-scroll");
-        $(".storefront-handheld-footer-bar").addClass("no-footer");
-        $(".menu-toggle").attr("aria-expanded","true");
-        $("#site-navigation").addClass('toggled');
-    }
-
-    function hideMobileNav() {
-        $("#menu-responsive-menu").removeClass('menu-responsive-visible');
-        $("#page").removeClass('page-shift');
-        $("html").removeClass("no-scroll");
-        $(".storefront-handheld-footer-bar").removeClass("no-footer");
-        $(".menu-toggle").attr("aria-expanded","false");
-        $("#site-navigation").removeClass('toggled');
-    }
-
-    if (page) {
-        page.onclick = function (e) {
-            if ($(window).width() > 768) {
-            }
-            else {
-                if (mobileToggle == true) {
-                    hideMobileNav();
-                    mobileToggle = false;
-                }
-            }
-        }
-    }
-    if (siteNavigation) {
-        siteNavigation.onclick = function (e) {
-            if ($(window).width() > 768) {
-            }
-            else {
-                if (mobileToggle == false) {
-                    e.stopPropagation();
-                    mobileToggle = true;
-                    showMobileNav();
-                } else {
-                    mobileToggle = false;
-                    hideMobileNav();
-                }
-            }
-        }
-    }
 	
 	
 	/*******************************
@@ -175,5 +118,9 @@
         });
     });
 	
+	/*****************************
+		TypeKit Script
+	******************************/
+		try{Typekit.load({ async: true });}catch(e){}
 	
 })(jQuery);
