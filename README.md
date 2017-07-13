@@ -55,18 +55,12 @@ Some basics about the Sass and CSS files that come with UnderStrap:
 
 ## Installation
 
-### Classic install
 - Download the lwr folder from GitHub
-- IMPORTANT: If you download it from GitHub make sure you rename the "lwr-woocommerce-theme.zip" file just to "lwr.zip" or you might have problems using child themes !!
+- IMPORTANT: If you download it from GitHub make sure you rename the "lwr-woocommerce-theme.zip" file just to "lwr.zip"
 - Upload it into your WordPress installation subfolder here: `/wp-content/themes/`
 - Login to your WordPress backend
 - Go to Appearance → Themes
 - Activate the LWR theme
-
-### npm install
-- Open your terminal
-- Change to the directory where you want to add UnderStrap
-- Type `npm install lwr`
 
 ## Developing With npm, Gulp and SASS and [Browser Sync][1]
 
