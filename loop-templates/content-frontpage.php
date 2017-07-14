@@ -69,10 +69,10 @@
 		$params = array(
 				'controls'    		=> 0,
 				'enablejsapi' 		=> 1,
-				'start' 		=> 25,
+				'start' 					=> 25,
 				'modestbranding' 	=> 1,
-				'showinfo'       	=> 0,
-				'rel'    		=> 0
+				'showinfo'        => 0,
+				'rel'    					=> 0
 		);
 		$new_src = add_query_arg($params, $src);
 		$iframe = str_replace($src, $new_src, $iframe);
@@ -106,18 +106,18 @@
 					});
 				}
 
+				var w = jQuery(window).width();
+				var h = w*.5625;
 				function onPlayerReady(event) {
-					var w = jQuery(window).width();
-					var h = w*.5625;
 					event.target.setSize(w, h);
 					event.target.setPlaybackRate(0.5);
 					event.target.mute();
 					event.target.playVideo();
 				}
-
 		</script>
 		<?php
-	}	
+	}
+	
 /*
  * Section for Mission Statement and Reach of Support
  */
