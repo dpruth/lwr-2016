@@ -69,10 +69,10 @@
 		$params = array(
 				'controls'    		=> 0,
 				'enablejsapi' 		=> 1,
-				'start' 					=> 25,
+				'start' 		=> 25,
 				'modestbranding' 	=> 1,
-				'showinfo'        => 0,
-				'rel'    					=> 0
+				'showinfo'       	=> 0,
+				'rel'    		=> 0
 		);
 		$new_src = add_query_arg($params, $src);
 		$iframe = str_replace($src, $new_src, $iframe);
@@ -83,7 +83,20 @@
 		<section id="homepage-top-banner" class="has-full-width-image">
 			<a href="#" target="_blank" onClick="ga('send', 'event', 'Video', 'play', 'Homepage');" >
 			<?php echo $iframe; ?>
-			<script type="text/javascript">
+
+			<div class="banner" >
+				<h2 class="tagline"><?php echo esc_attr(get_field('home_video_heading')); ?></h2>
+				<div class="vidlink"><i class="fa fa-play-circle fa-lg" aria-hidden="true"></i><?php echo esc_attr(get_field('video_cta')); ?></div>
+			</div>
+		</a>
+		</section>
+	<?php
+		add_action('wp_footer', 'video_banner_script');
+	}
+	
+	function video_banner_script() {
+		?>
+		<script type="text/javascript">
 			var tag = document.createElement('script');
 				tag.src = 'https://www.youtube.com/iframe_api';
 				
@@ -108,16 +121,9 @@
 					event.target.playVideo();
 				}
 
-			</script>
-
-			<div class="banner" >
-				<h2 class="tagline"><?php echo esc_attr(get_field('home_video_heading')); ?></h2>
-				<div class="vidlink"><i class="fa fa-play-circle fa-lg" aria-hidden="true"></i><?php echo esc_attr(get_field('video_cta')); ?></div>
-			</div>
-		</a>
-		</section>
-	<?php }
-	
+		</script>
+		<?php
+	}	
 /*
  * Section for Mission Statement and Reach of Support
  */
