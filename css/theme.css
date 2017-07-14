@@ -10394,7 +10394,7 @@ table {
 .site-branding a {
   display: block;
   background-image: url("../img/lwr_logo_icon.svg");
-  background-size: 100%;
+  background-size: contain;
   background-repeat: no-repeat;
   position: relative;
   width: 100%;
