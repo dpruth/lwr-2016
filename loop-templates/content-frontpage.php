@@ -90,12 +90,6 @@
 			</div>
 		</a>
 		</section>
-	<?php
-		add_action('wp_footer', 'video_banner_script');
-	}
-	
-	function video_banner_script() {
-		?>
 		<script type="text/javascript">
 			var tag = document.createElement('script');
 				tag.src = 'https://www.youtube.com/iframe_api';
