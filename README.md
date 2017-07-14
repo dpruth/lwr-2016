@@ -14,11 +14,6 @@ I’m a huge fan of Underscores, Bootstrap, and Sass. Why not combine these into
 That’s what UnderStrap is.
 You can use it as starter theme and build your own theme on top of it. Or you use it as parent theme and create your own child theme for UnderStrap.
 
-## License
-UnderStrap is released under the terms of the GPL version 2 or (at your option) any later version.
-
-http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
-
 ## Basic Features
 
 - Combines Underscore’s PHP/JS files and Bootstrap’s HTML/CSS/JS.
@@ -114,12 +109,10 @@ The `fullwidthpage.php` template has full width layout without a sidebar.
 
 Licenses & Credits
 =
+- UnderStrap: http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html (Licensed under GPL version 2)
 - Font Awesome: http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
 - Bootstrap: http://getbootstrap.com | https://github.com/twbs/bootstrap/blob/master/LICENSE (Code licensed under MIT documentation under CC BY 3.0.)
 and of course
 - jQuery: https://jquery.org | (Code licensed under MIT)
 - WP Bootstrap Navwalker by Edward McIntyre: https://github.com/twittem/wp-bootstrap-navwalker | GNU GPL
 - Bootstrap Gallery Script based on Roots Sage Gallery: https://github.com/roots/sage/blob/5b9786b8ceecfe717db55666efe5bcf0c9e1801c/lib/gallery.php
-
-
-[![Analytics](https://ga-beacon.appspot.com/UA-139292-31/chromeskel_a/readme)](https://github.com/igrigorik/ga-beacon)
