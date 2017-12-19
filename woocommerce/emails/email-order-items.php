@@ -23,8 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 $text_align = is_rtl() ? 'right' : 'left';
 
 foreach ( $items as $item_id => $item ) :
+	$product = $item->get_product();
 	if ( apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
-		$product = $item->get_product();
 		?>
 		<tr class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'order_item', $item, $order ) ); ?>">
 			<td class="td" style="text-align:<?php echo $text_align; ?>; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; word-wrap:break-word;"><?php
@@ -55,18 +55,12 @@ foreach ( $items as $item_id => $item ) :
 								echo '<br /><small><a href="' . esc_url('http://cards.lwrgifts.org') . '">Print or email your greeting cards</a></small>';
 							} elseif ( $greeting == 'pre-printed' ) {
 								echo '<br /><small>Please allow up to 10 business days for the order to be processed and greeting cards placed in the mail.</small>';
-							}	else {
-								echo '<br/><small>' . nl2br( $item_meta->display( true, true, '_', "\n" ) ) . '</small>';
-							}
+							}	
 						}
 					}
 				 
 
 				wc_display_item_meta( $item );
-
-				if ( $show_download_links ) {
-					wc_display_item_downloads( $item );
-				}
 
 				// allow other plugins to add additional product information here
 				do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, $plain_text );
